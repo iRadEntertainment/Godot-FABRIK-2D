@@ -1,0 +1,40 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://icon.png" type="Texture" id=1]
+[ext_resource path="res://root.gd" type="Script" id=2]
+[ext_resource path="res://debug.gd" type="Script" id=3]
+
+[node name="world" type="Node2D"]
+
+[node name="root" type="Sprite" parent="."]
+position = Vector2( 489, 271.719 )
+texture = ExtResource( 1 )
+script = ExtResource( 2 )
+
+[node name="p1" type="Sprite" parent="root"]
+position = Vector2( 31.436, -25.2464 )
+rotation = -0.754197
+scale = Vector2( 2.09652, 0.238956 )
+texture = ExtResource( 1 )
+offset = Vector2( 27.8535, -0.114746 )
+
+[node name="p2" type="Sprite" parent="root"]
+position = Vector2( 123.568, -107.149 )
+scale = Vector2( 1.63387, 0.169389 )
+texture = ExtResource( 1 )
+offset = Vector2( 27.8535, -0.114746 )
+
+[node name="p3" type="Sprite" parent="root"]
+position = Vector2( 214.778, -104.503 )
+rotation = 1.57079
+scale = Vector2( 1.38423, 0.14311 )
+texture = ExtResource( 1 )
+offset = Vector2( 27.8535, -0.114746 )
+
+[node name="end" type="Position2D" parent="root"]
+position = Vector2( 216.568, -26.4701 )
+scale = Vector2( 0.9375, 0.15625 )
+
+[node name="debug" type="Node2D" parent="."]
+modulate = Color( 1, 1, 1, 0.827451 )
+script = ExtResource( 3 )

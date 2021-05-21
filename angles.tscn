@@ -1,0 +1,271 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://angles_anto.gd" type="Script" id=1]
+
+[sub_resource type="StyleBoxFlat" id=1]
+content_margin_left = 16.0
+content_margin_right = 16.0
+content_margin_top = 16.0
+content_margin_bottom = 16.0
+bg_color = Color( 0, 0, 0, 0.752941 )
+
+[sub_resource type="StyleBoxEmpty" id=2]
+content_margin_left = 8.0
+content_margin_right = 8.0
+content_margin_top = 8.0
+content_margin_bottom = 8.0
+
+[node name="angles" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_lock_": true,
+"_edit_use_anchors_": false
+}
+
+[node name="bg" type="ColorRect" parent="."]
+show_behind_parent = true
+anchor_right = 1.0
+anchor_bottom = 1.0
+mouse_filter = 2
+color = Color( 0.117647, 0.121569, 0.152941, 1 )
+__meta__ = {
+"_edit_lock_": true,
+"_edit_use_anchors_": false
+}
+
+[node name="clock" type="Node2D" parent="."]
+position = Vector2( 475.74, 270.833 )
+
+[node name="a0" type="Line2D" parent="clock"]
+points = PoolVector2Array( 0, 0, 50, 0, 100, 0, 150, 0, 200, 0 )
+width = 1.0
+default_color = Color( 0.772549, 0.866667, 0.317647, 1 )
+sharp_limit = 8.0
+round_precision = 16
+antialiased = true
+
+[node name="a1" type="Line2D" parent="clock"]
+points = PoolVector2Array( 0, 0, 50, 0, 100, 0, 150, 0, 200, 0 )
+width = 1.0
+default_color = Color( 0.866667, 0.6, 0.317647, 1 )
+sharp_limit = 8.0
+round_precision = 16
+antialiased = true
+
+[node name="a" type="Line2D" parent="clock"]
+points = PoolVector2Array( 0, 0, 50, 0, 100, 0, 150, 0, 200, 0 )
+width = 1.0
+default_color = Color( 0.945098, 0.207843, 0.0117647, 1 )
+sharp_limit = 8.0
+round_precision = 16
+antialiased = true
+
+[node name="controls" type="PanelContainer" parent="."]
+anchor_top = 1.0
+anchor_bottom = 1.0
+margin_top = -194.0
+margin_right = 343.0
+custom_styles/panel = SubResource( 1 )
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="vbox" type="VBoxContainer" parent="controls"]
+margin_left = 16.0
+margin_top = 16.0
+margin_right = 327.0
+margin_bottom = 178.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="a0" type="HBoxContainer" parent="controls/vbox"]
+margin_right = 311.0
+margin_bottom = 16.0
+
+[node name="lb" type="Label" parent="controls/vbox/a0"]
+margin_top = 1.0
+margin_right = 50.0
+margin_bottom = 15.0
+rect_min_size = Vector2( 50, 0 )
+text = "a0"
+align = 2
+
+[node name="sld" type="HSlider" parent="controls/vbox/a0"]
+margin_left = 54.0
+margin_right = 277.0
+margin_bottom = 16.0
+size_flags_horizontal = 3
+step = 0.0
+
+[node name="val" type="Label" parent="controls/vbox/a0"]
+margin_left = 281.0
+margin_top = 1.0
+margin_right = 311.0
+margin_bottom = 15.0
+rect_min_size = Vector2( 30, 0 )
+text = "50"
+
+[node name="a_width" type="HBoxContainer" parent="controls/vbox"]
+margin_top = 20.0
+margin_right = 311.0
+margin_bottom = 36.0
+
+[node name="lb" type="Label" parent="controls/vbox/a_width"]
+margin_top = 1.0
+margin_right = 50.0
+margin_bottom = 15.0
+rect_min_size = Vector2( 50, 0 )
+text = "width"
+align = 2
+
+[node name="sld" type="HSlider" parent="controls/vbox/a_width"]
+margin_left = 54.0
+margin_right = 277.0
+margin_bottom = 16.0
+size_flags_horizontal = 3
+step = 0.0
+
+[node name="val" type="Label" parent="controls/vbox/a_width"]
+margin_left = 281.0
+margin_top = 1.0
+margin_right = 311.0
+margin_bottom = 15.0
+rect_min_size = Vector2( 30, 0 )
+text = "50"
+
+[node name="a" type="HBoxContainer" parent="controls/vbox"]
+margin_top = 40.0
+margin_right = 311.0
+margin_bottom = 56.0
+
+[node name="lb" type="Label" parent="controls/vbox/a"]
+margin_top = 1.0
+margin_right = 50.0
+margin_bottom = 15.0
+rect_min_size = Vector2( 50, 0 )
+text = "a"
+align = 2
+
+[node name="sld" type="HSlider" parent="controls/vbox/a"]
+margin_left = 54.0
+margin_right = 277.0
+margin_bottom = 16.0
+size_flags_horizontal = 3
+step = 0.0
+
+[node name="val" type="Label" parent="controls/vbox/a"]
+margin_left = 281.0
+margin_top = 1.0
+margin_right = 311.0
+margin_bottom = 15.0
+rect_min_size = Vector2( 30, 0 )
+text = "50"
+
+[node name="sep1" type="HSeparator" parent="controls/vbox"]
+margin_top = 60.0
+margin_right = 311.0
+margin_bottom = 64.0
+
+[node name="in_range" type="PanelContainer" parent="controls/vbox"]
+margin_top = 68.0
+margin_right = 311.0
+margin_bottom = 104.0
+custom_styles/panel = SubResource( 2 )
+
+[node name="bg" type="ColorRect" parent="controls/vbox/in_range"]
+margin_left = 8.0
+margin_top = 8.0
+margin_right = 303.0
+margin_bottom = 28.0
+color = Color( 0.639216, 0, 0, 1 )
+
+[node name="lb" type="Label" parent="controls/vbox/in_range"]
+margin_left = 8.0
+margin_top = 8.0
+margin_right = 303.0
+margin_bottom = 28.0
+rect_min_size = Vector2( 0, 20 )
+text = "is inside the range"
+align = 1
+valign = 1
+
+[node name="sep2" type="HSeparator" parent="controls/vbox"]
+margin_top = 108.0
+margin_right = 311.0
+margin_bottom = 112.0
+
+[node name="lb_closer" type="Label" parent="controls/vbox"]
+margin_top = 116.0
+margin_right = 311.0
+margin_bottom = 130.0
+text = "closer angle"
+align = 1
+valign = 1
+
+[node name="closer" type="HBoxContainer" parent="controls/vbox"]
+margin_top = 134.0
+margin_right = 311.0
+margin_bottom = 162.0
+rect_min_size = Vector2( 0, 28 )
+
+[node name="a0" type="Label" parent="controls/vbox/closer"]
+margin_right = 153.0
+margin_bottom = 28.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+text = "a0"
+align = 1
+valign = 1
+
+[node name="bg" type="ColorRect" parent="controls/vbox/closer/a0"]
+show_behind_parent = true
+anchor_right = 1.0
+anchor_bottom = 1.0
+color = Color( 0.266667, 0, 0, 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="a1" type="Label" parent="controls/vbox/closer"]
+margin_left = 157.0
+margin_right = 311.0
+margin_bottom = 28.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+text = "a1"
+align = 1
+valign = 1
+
+[node name="bg" type="ColorRect" parent="controls/vbox/closer/a1"]
+show_behind_parent = true
+anchor_right = 1.0
+anchor_bottom = 1.0
+color = Color( 0.266667, 0, 0, 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="tw" type="Tween" parent="."]
+
+[node name="float_lbs" type="Control" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+mouse_filter = 2
+
+[node name="a0" type="Label" parent="float_lbs"]
+margin_right = 40.0
+margin_bottom = 14.0
+
+[node name="a1" type="Label" parent="float_lbs"]
+margin_right = 40.0
+margin_bottom = 14.0
+
+[node name="a" type="Label" parent="float_lbs"]
+margin_right = 40.0
+margin_bottom = 14.0
+
+[connection signal="gui_input" from="." to="." method="_on_angles_gui_input"]
+[connection signal="resized" from="." to="." method="update_graphics"]

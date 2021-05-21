@@ -1,0 +1,40 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://icon.png" type="Texture" id=1]
+[ext_resource path="res://IKLimb2D.gd" type="Script" id=3]
+
+[sub_resource type="GDScript" id=1]
+script/source = "extends Sprite
+
+var move_speed = 60
+var rot_speed = PI
+var transl = Vector2()
+
+
+func _process(delta):
+	# move
+	transl.y = int(Input.is_key_pressed(KEY_S)) - int(Input.is_key_pressed(KEY_W))
+	transl.x = int(Input.is_key_pressed(KEY_D)) - int(Input.is_key_pressed(KEY_A))
+	global_position += transl
+	# rotate
+	if Input.is_key_pressed(KEY_Q): global_rotation -= delta*rot_speed
+	elif Input.is_key_pressed(KEY_E): global_rotation += delta*rot_speed
+	
+	self_modulate = Color.green if $arm1.contact else Color.white
+"
+
+[node name="test2" type="Node2D"]
+
+[node name="operator" type="Sprite" parent="."]
+position = Vector2( 226.508, 161.805 )
+texture = ExtResource( 1 )
+script = SubResource( 1 )
+
+[node name="arm1" type="Node2D" parent="operator"]
+position = Vector2( 25.3984, -22.2236 )
+script = ExtResource( 3 )
+contact_threshold = 2
+
+[node name="end" type="Position2D" parent="operator/arm1"]
+show_behind_parent = true
+position = Vector2( 140.166, -30.6758 )

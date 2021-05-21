@@ -1,0 +1,45 @@
+; Engine configuration file.
+; It's best edited using the editor UI and not directly,
+; since the parameters that go here are not all obvious.
+;
+; Format:
+;   [section] ; section goes between []
+;   param=value ; assign values to parameters
+
+config_version=4
+
+_global_script_classes=[ {
+"base": "Node2D",
+"class": "IKBoneConstraint2D",
+"language": "GDScript",
+"path": "res://IKBoneConstraint2D.gd"
+}, {
+"base": "Node2D",
+"class": "IKLimb2D",
+"language": "GDScript",
+"path": "res://IKLimb2D.gd"
+}, {
+"base": "Node",
+"class": "IKNodes",
+"language": "GDScript",
+"path": "res://ik_constraint_for_nodes.gd"
+} ]
+_global_script_class_icons={
+"IKBoneConstraint2D": "res://IKBoneConstraint2D.png",
+"IKLimb2D": "res://IKLimb2D.png",
+"IKNodes": ""
+}
+
+[application]
+
+config/name="IKconstraintTest"
+run/main_scene="res://world.tscn"
+config/icon="res://icon.png"
+
+[physics]
+
+common/enable_pause_aware_picking=true
+
+[rendering]
+
+environment/default_environment="res://default_env.tres"
