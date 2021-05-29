@@ -8,12 +8,13 @@ func _process(delta):
 	update()
 
 func _draw():
+	var start_pos = root.get_node("p1").global_position
 	for i in range(root.ik.p.size()):
-		var p = root.ik.p[i] + root.get_node("p1").global_position
-		var p_forw = root.ik.p_forw[i] + root.get_node("p1").global_position
-		var p_back = root.ik.p_back[i] + root.get_node("p1").global_position
+		var p = root.ik.p[i] + start_pos
+		var p_forw = root.ik.p_forw[i] + start_pos
+		var p_back = root.ik.p_back[i] + start_pos
 		
-#		draw_circle(p, 2, Color.crimson)
+		draw_circle(p, 2, Color.crimson)
 		draw_circle(p_forw, 2, Color.firebrick)
 		draw_circle(p_back, 2, Color.aquamarine)
 		
@@ -30,5 +31,9 @@ func _draw():
 			draw_line(p, p + vec_sample.rotated(a), Color.green)
 			draw_arc(p, 30, a0, a1, 20, Color.coral)
 	
-	var cont_color = Color.green if root.ik.fl_contact else Color.firebrick
+	var cont_color = Color.green if root.ik.contact else Color.firebrick
 	draw_circle(Vector2(10,10), 6, cont_color)
+
+func _input(event):
+	if event.is_action_pressed("ui_accept"):
+		visible = not visible

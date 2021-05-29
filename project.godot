@@ -12,29 +12,67 @@ _global_script_classes=[ {
 "base": "Node2D",
 "class": "IKBoneConstraint2D",
 "language": "GDScript",
-"path": "res://IKBoneConstraint2D.gd"
+"path": "res://addons/IKFabrikGodot2D/IKBoneConstraint2D.gd"
 }, {
 "base": "Node2D",
 "class": "IKLimb2D",
 "language": "GDScript",
-"path": "res://IKLimb2D.gd"
+"path": "res://addons/IKFabrikGodot2D/IKLimb2D.gd"
 }, {
-"base": "Node",
+"base": "Reference",
 "class": "IKNodes",
 "language": "GDScript",
-"path": "res://ik_constraint_for_nodes.gd"
+"path": "res://addons/IKFabrikGodot2D/ik_constraint_for_nodes.gd"
 } ]
 _global_script_class_icons={
-"IKBoneConstraint2D": "res://IKBoneConstraint2D.png",
-"IKLimb2D": "res://IKLimb2D.png",
+"IKBoneConstraint2D": "res://addons/IKFabrikGodot2D/IKBoneConstraint2D.png",
+"IKLimb2D": "res://addons/IKFabrikGodot2D/IKLimb2D.png",
 "IKNodes": ""
 }
 
 [application]
 
-config/name="IKconstraintTest"
+config/name="Godot FABRIK for 2D"
 run/main_scene="res://world.tscn"
 config/icon="res://icon.png"
+
+[display]
+
+window/size/width=1680
+window/size/height=1024
+
+[editor_plugins]
+
+enabled=PoolStringArray( "res://addons/IKFabrikGodot2D/plugin.cfg" )
+
+[input]
+
+left={
+"deadzone": 0.5,
+"events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":65,"unicode":0,"echo":false,"script":null)
+ ]
+}
+right={
+"deadzone": 0.5,
+"events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":68,"unicode":0,"echo":false,"script":null)
+ ]
+}
+up={
+"deadzone": 0.5,
+"events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":87,"unicode":0,"echo":false,"script":null)
+ ]
+}
+down={
+"deadzone": 0.5,
+"events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":83,"unicode":0,"echo":false,"script":null)
+ ]
+}
+
+[layer_names]
+
+2d_physics/layer_1="solid"
+2d_physics/layer_2="player"
+2d_physics/layer_3="area triggers"
 
 [physics]
 

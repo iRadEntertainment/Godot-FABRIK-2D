@@ -1,40 +1,250 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=14 format=2]
 
-[ext_resource path="res://icon.png" type="Texture" id=1]
-[ext_resource path="res://root.gd" type="Script" id=2]
-[ext_resource path="res://debug.gd" type="Script" id=3]
+[ext_resource path="res://no_constr.tscn" type="PackedScene" id=1]
+[ext_resource path="res://constr.tscn" type="PackedScene" id=2]
+[ext_resource path="res://Alatsi-Regular.ttf" type="DynamicFontData" id=3]
+[ext_resource path="res://fabrik.tscn" type="PackedScene" id=4]
+[ext_resource path="res://addons/IKFabrikGodot2D/examples/angles.tscn" type="PackedScene" id=5]
+[ext_resource path="res://world.tres" type="Theme" id=6]
+[ext_resource path="res://key_snip.tscn" type="PackedScene" id=7]
+[ext_resource path="res://example/example.tscn" type="PackedScene" id=8]
+[ext_resource path="res://pause_screen.tscn" type="PackedScene" id=9]
 
-[node name="world" type="Node2D"]
+[sub_resource type="GDScript" id=1]
+script/source = "extends Control
 
-[node name="root" type="Sprite" parent="."]
-position = Vector2( 489, 271.719 )
-texture = ExtResource( 1 )
-script = ExtResource( 2 )
 
-[node name="p1" type="Sprite" parent="root"]
-position = Vector2( 31.436, -25.2464 )
-rotation = -0.754197
-scale = Vector2( 2.09652, 0.238956 )
-texture = ExtResource( 1 )
-offset = Vector2( 27.8535, -0.114746 )
+var scenes = []
+var slide_buttons = []
 
-[node name="p2" type="Sprite" parent="root"]
-position = Vector2( 123.568, -107.149 )
-scale = Vector2( 1.63387, 0.169389 )
-texture = ExtResource( 1 )
-offset = Vector2( 27.8535, -0.114746 )
+func _ready():
+	# initialize scenes array
+	for scene in $layout/middle/scenes.get_children():
+		scenes.append(scene)
+	
+	
+	# delete existing example buttons
+	for button in $layout/bottom/slides_ctrl.get_children():
+		button.free()
+	
+	# create slides buttons
+	for i in range(scenes.size()):
+		var new_button = Button.new()
+		new_button.text = scenes[i].name
+		# connect button pressed to \"swow_slide\" passing the index as argument
+		new_button.connect(\"pressed\", self, \"show_slide\", [i])
+		$layout/bottom/slides_ctrl.add_child(new_button)
 
-[node name="p3" type="Sprite" parent="root"]
-position = Vector2( 214.778, -104.503 )
-rotation = 1.57079
-scale = Vector2( 1.38423, 0.14311 )
-texture = ExtResource( 1 )
-offset = Vector2( 27.8535, -0.114746 )
 
-[node name="end" type="Position2D" parent="root"]
-position = Vector2( 216.568, -26.4701 )
-scale = Vector2( 0.9375, 0.15625 )
+func show_slide(slide : int):
+	# hide all scene first
+	for scene in scenes:
+		scene.visible = false
+	
+	if slide > scenes.size()-1:
+		return
+	
+	scenes[slide].visible = true
 
-[node name="debug" type="Node2D" parent="."]
-modulate = Color( 1, 1, 1, 0.827451 )
-script = ExtResource( 3 )
+
+
+
+func _input(event):
+	if event is InputEventKey and event.is_pressed():
+		if event.scancode == KEY_F:
+			OS.window_fullscreen = not OS.window_fullscreen
+			
+"
+
+[sub_resource type="DynamicFont" id=2]
+size = 40
+use_mipmaps = true
+use_filter = true
+font_data = ExtResource( 3 )
+
+[sub_resource type="StyleBoxEmpty" id=3]
+content_margin_left = 16.0
+content_margin_right = 16.0
+content_margin_top = 16.0
+content_margin_bottom = 16.0
+
+[sub_resource type="GDScript" id=4]
+script/source = "extends Position2D
+
+
+
+func _process(_delta):
+	global_position = get_global_mouse_position()
+#	update()
+
+func _draw():
+	pass
+#	draw_circle(Vector2(), 5, Color.lightcoral)
+"
+
+[node name="world" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+mouse_filter = 2
+theme = ExtResource( 6 )
+script = SubResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="bg" type="ColorRect" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+mouse_filter = 2
+color = Color( 0.0901961, 0.247059, 0.372549, 1 )
+__meta__ = {
+"_edit_lock_": true,
+"_edit_use_anchors_": false
+}
+
+[node name="layout" type="VBoxContainer" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+mouse_filter = 2
+custom_constants/separation = 0
+__meta__ = {
+"_edit_lock_": true,
+"_edit_use_anchors_": false
+}
+
+[node name="title" type="Label" parent="layout"]
+margin_right = 1680.0
+margin_bottom = 107.0
+custom_fonts/font = SubResource( 2 )
+text = "Inverse kinematic (FABRIK)
+for Godot 2D"
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="middle" type="Panel" parent="layout"]
+margin_top = 107.0
+margin_right = 1680.0
+margin_bottom = 944.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+custom_styles/panel = SubResource( 3 )
+
+[node name="scenes" type="Control" parent="layout/middle"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 14.0
+margin_top = 13.0
+margin_right = -13.0
+margin_bottom = -12.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Free Operator" parent="layout/middle/scenes" instance=ExtResource( 1 )]
+visible = false
+target = NodePath("../../../../target")
+
+[node name="Constrained Operator" parent="layout/middle/scenes" instance=ExtResource( 2 )]
+visible = false
+target = NodePath("../../../../target")
+
+[node name="FABRIK explanation" parent="layout/middle/scenes" instance=ExtResource( 4 )]
+visible = false
+
+[node name="Angles calculation" parent="layout/middle/scenes" instance=ExtResource( 5 )]
+visible = false
+
+[node name="Example Scene" type="ViewportContainer" parent="layout/middle/scenes"]
+visible = false
+anchor_right = 1.0
+anchor_bottom = 1.0
+stretch = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Viewport" type="Viewport" parent="layout/middle/scenes/Example Scene"]
+size = Vector2( 1653, 812 )
+handle_input_locally = false
+render_target_update_mode = 0
+
+[node name="example" parent="layout/middle/scenes/Example Scene/Viewport" instance=ExtResource( 8 )]
+margin_left = 14.0
+margin_top = 120.0
+margin_right = 14.0
+margin_bottom = 120.0
+
+[node name="Pause Stream" parent="layout/middle/scenes" instance=ExtResource( 9 )]
+visible = false
+brb_time = 480
+
+[node name="key_snip" parent="layout/middle" instance=ExtResource( 7 )]
+anchor_left = 1.0
+anchor_right = 1.0
+margin_left = -169.379
+margin_top = 17.6389
+margin_right = -16.3789
+margin_bottom = 147.639
+
+[node name="bottom" type="ColorRect" parent="layout"]
+margin_top = 944.0
+margin_right = 1680.0
+margin_bottom = 1024.0
+rect_min_size = Vector2( 0, 80 )
+mouse_filter = 2
+color = Color( 0.0705882, 0.0784314, 0.109804, 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="slides_ctrl" type="HBoxContainer" parent="layout/bottom"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 7.0
+margin_top = 9.0
+margin_right = -7.0
+margin_bottom = -10.0
+mouse_filter = 2
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ex_no_constr" type="Button" parent="layout/bottom/slides_ctrl"]
+margin_right = 311.0
+margin_bottom = 61.0
+focus_mode = 0
+enabled_focus_mode = 0
+text = "No constraint operator"
+
+[node name="ex_constr" type="Button" parent="layout/bottom/slides_ctrl"]
+margin_left = 315.0
+margin_right = 609.0
+margin_bottom = 61.0
+focus_mode = 0
+enabled_focus_mode = 0
+text = "Constrained operator"
+
+[node name="fabrik" type="Button" parent="layout/bottom/slides_ctrl"]
+margin_left = 613.0
+margin_right = 882.0
+margin_bottom = 61.0
+focus_mode = 0
+enabled_focus_mode = 0
+text = "FABRIK explanation"
+
+[node name="angles" type="Button" parent="layout/bottom/slides_ctrl"]
+margin_left = 886.0
+margin_right = 1129.0
+margin_bottom = 61.0
+focus_mode = 0
+enabled_focus_mode = 0
+text = "Angles definition"
+
+[node name="target" type="Position2D" parent="."]
+position = Vector2( 854.144, 813.377 )
+script = SubResource( 4 )

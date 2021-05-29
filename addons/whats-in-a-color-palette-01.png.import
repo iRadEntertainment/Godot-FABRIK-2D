@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/IKBoneConstraint2D.png-5a9cfb6194004484142108130150c72e.stex"
+path="res://.import/whats-in-a-color-palette-01.png-0232324db0f5114c1fabeb81ff7545ab.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://IKBoneConstraint2D.png"
-dest_files=[ "res://.import/IKBoneConstraint2D.png-5a9cfb6194004484142108130150c72e.stex" ]
+source_file="res://addons/whats-in-a-color-palette-01.png"
+dest_files=[ "res://.import/whats-in-a-color-palette-01.png-0232324db0f5114c1fabeb81ff7545ab.stex" ]
 
 [params]
 

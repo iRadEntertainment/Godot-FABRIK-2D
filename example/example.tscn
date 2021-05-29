@@ -1,0 +1,435 @@
+[gd_scene load_steps=18 format=2]
+
+[ext_resource path="res://addons/IKFabrikGodot2D/IKBoneConstraint2D.gd" type="Script" id=1]
+[ext_resource path="res://addons/IKFabrikGodot2D/IKLimb2D.gd" type="Script" id=2]
+[ext_resource path="res://example/textures/body.png" type="Texture" id=3]
+[ext_resource path="res://example/textures/forearm.png" type="Texture" id=4]
+[ext_resource path="res://example/textures/arm.png" type="Texture" id=5]
+[ext_resource path="res://example/textures/head.png" type="Texture" id=6]
+[ext_resource path="res://example/textures/foot.png" type="Texture" id=7]
+[ext_resource path="res://example/kinematic_controller.gd" type="Script" id=8]
+[ext_resource path="res://bg_poly.jpg" type="Texture" id=9]
+[ext_resource path="res://example/terrain_generator.gd" type="Script" id=10]
+[ext_resource path="res://example/targeting_system.gd" type="Script" id=11]
+[ext_resource path="res://example/targeting_snap_to_ground.gd" type="Script" id=12]
+
+[sub_resource type="GDScript" id=1]
+script/source = "extends Camera2D
+
+func _input(event):
+	if event is InputEventMouseButton:
+		if event.button_index == BUTTON_WHEEL_UP and event.is_pressed():
+			zoom *= 0.9
+		elif event.button_index == BUTTON_WHEEL_DOWN and event.is_pressed():
+			zoom *= 1.1
+	
+"
+
+[sub_resource type="Animation" id=2]
+resource_name = "head_bobbing"
+length = 2.2
+loop = true
+tracks/0/type = "bezier"
+tracks/0/path = NodePath(".:position:y")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"points": PoolRealArray( -121.932, -0.25, 0, 0.25, 0, -76.6729, -0.25, 0, 0.25, 0, -136.673, -0.25, 0, 0.25, 0, -81.6729, -0.25, 0, 0.25, 0, -121.932, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0, 0.5, 1.1, 1.7, 2.2 )
+}
+
+[sub_resource type="CapsuleShape2D" id=3]
+radius = 103.735
+height = 248.462
+
+[sub_resource type="CapsuleShape2D" id=4]
+radius = 106.189
+height = 287.8
+
+[sub_resource type="GDScript" id=5]
+script/source = "extends Position2D
+
+
+func _input(_event):
+	global_position = get_global_mouse_position()
+"
+
+[node name="example" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+__meta__ = {
+"_edit_lock_": true,
+"_edit_use_anchors_": false
+}
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+layer = -1
+
+[node name="bg_color" type="ColorRect" parent="CanvasLayer"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+color = Color( 0.12549, 0.388235, 0.607843, 1 )
+__meta__ = {
+"_edit_lock_": true,
+"_edit_use_anchors_": false
+}
+
+[node name="bg" type="ParallaxBackground" parent="."]
+
+[node name="bg_scroll" type="ParallaxLayer" parent="bg"]
+visible = false
+motion_mirroring = Vector2( 3030, 0 )
+
+[node name="image" type="Sprite" parent="bg/bg_scroll"]
+position = Vector2( 975.466, 478.348 )
+scale = Vector2( 3.16, 3.16 )
+texture = ExtResource( 9 )
+
+[node name="terrain_generator" type="Node2D" parent="."]
+script = ExtResource( 10 )
+
+[node name="poly" type="Polygon2D" parent="terrain_generator"]
+color = Color( 0.235294, 0.682353, 0.639216, 1 )
+polygon = PoolVector2Array( -68.6539, 912.083, 57.8537, 623.432, 383.923, 612.742, 750.973, 684.013, 980.825, 664.414, 1276.6, 605.614, 1622.27, 676.886, 1787.98, 853.284, 1627.62, 1175.79, 193.27, 1074.23 )
+
+[node name="static_collision" type="StaticBody2D" parent="terrain_generator"]
+
+[node name="coll" type="CollisionPolygon2D" parent="terrain_generator/static_collision"]
+
+[node name="horse" type="KinematicBody2D" parent="." groups=[
+"horse",
+]]
+position = Vector2( 1568.09, 441.984 )
+scale = Vector2( 0.5, 0.5 )
+collision_layer = 2
+
+[node name="kinematic_controller" type="Node" parent="horse"]
+script = ExtResource( 8 )
+
+[node name="body" type="Sprite" parent="horse"]
+texture = ExtResource( 3 )
+
+[node name="cam" type="Camera2D" parent="horse"]
+position = Vector2( -472, -196 )
+current = true
+limit_top = -10000
+limit_bottom = 1024
+script = SubResource( 1 )
+
+[node name="head" type="Node2D" parent="horse"]
+position = Vector2( -238.815, -63.0672 )
+script = ExtResource( 2 )
+use_constraints = true
+target = NodePath("../target_h")
+
+[node name="neck" type="Node2D" parent="horse/head"]
+show_behind_parent = true
+position = Vector2( -3.25, -3.25 )
+script = ExtResource( 1 )
+angle_start = 142.397
+
+[node name="head" type="Sprite" parent="horse/head/neck"]
+show_behind_parent = true
+position = Vector2( -74.4448, -46.043 )
+texture = ExtResource( 6 )
+
+[node name="end" type="Position2D" parent="horse/head"]
+show_behind_parent = true
+position = Vector2( -113.5, -19.222 )
+
+[node name="rear_r" type="Node2D" parent="horse"]
+show_behind_parent = true
+position = Vector2( 244.639, 89.9283 )
+script = ExtResource( 2 )
+use_constraints = true
+target = NodePath("../../targeting_system_loop/targets/t04")
+
+[node name="arm" type="Node2D" parent="horse/rear_r"]
+show_behind_parent = true
+script = ExtResource( 1 )
+angle_start = 28.973
+angle_width = 163.973
+
+[node name="arm" type="Sprite" parent="horse/rear_r/arm"]
+show_behind_parent = true
+position = Vector2( -0.272461, -0.0234985 )
+texture = ExtResource( 5 )
+offset = Vector2( 0.841858, 57.2455 )
+
+[node name="forearm" type="Node2D" parent="horse/rear_r"]
+show_behind_parent = true
+position = Vector2( -0.125, 155.934 )
+script = ExtResource( 1 )
+angle_start = -128.836
+angle_width = 131.918
+
+[node name="forearm" type="Sprite" parent="horse/rear_r/forearm"]
+show_behind_parent = true
+position = Vector2( 0.355286, 48.1064 )
+texture = ExtResource( 4 )
+
+[node name="foot" type="Node2D" parent="horse/rear_r"]
+show_behind_parent = true
+position = Vector2( -0.268677, 296.896 )
+script = ExtResource( 1 )
+angle_start = -40.069
+
+[node name="foot" type="Sprite" parent="horse/rear_r/foot"]
+show_behind_parent = true
+position = Vector2( -1.93286, 6.53381 )
+texture = ExtResource( 7 )
+
+[node name="end" type="Position2D" parent="horse/rear_r"]
+show_behind_parent = true
+position = Vector2( 0, 332.995 )
+
+[node name="rear_l" type="Node2D" parent="horse"]
+position = Vector2( 137.045, 89.9283 )
+script = ExtResource( 2 )
+use_constraints = true
+target = NodePath("../../targeting_system_loop/targets/t03")
+
+[node name="arm" type="Node2D" parent="horse/rear_l"]
+show_behind_parent = true
+script = ExtResource( 1 )
+angle_start = 28.973
+angle_width = 163.973
+
+[node name="arm" type="Sprite" parent="horse/rear_l/arm"]
+show_behind_parent = true
+position = Vector2( -0.272461, -0.0234985 )
+texture = ExtResource( 5 )
+offset = Vector2( 0.841858, 57.2455 )
+
+[node name="forearm" type="Node2D" parent="horse/rear_l"]
+show_behind_parent = true
+position = Vector2( -0.125, 155.934 )
+script = ExtResource( 1 )
+angle_start = -128.836
+angle_width = 131.918
+
+[node name="forearm" type="Sprite" parent="horse/rear_l/forearm"]
+show_behind_parent = true
+position = Vector2( 0.355286, 48.1064 )
+texture = ExtResource( 4 )
+
+[node name="foot" type="Node2D" parent="horse/rear_l"]
+show_behind_parent = true
+position = Vector2( -0.268677, 296.896 )
+script = ExtResource( 1 )
+angle_start = -40.069
+
+[node name="foot" type="Sprite" parent="horse/rear_l/foot"]
+show_behind_parent = true
+position = Vector2( -1.93286, 6.53381 )
+texture = ExtResource( 7 )
+
+[node name="end" type="Position2D" parent="horse/rear_l"]
+show_behind_parent = true
+position = Vector2( 0, 332.995 )
+
+[node name="front_r" type="Node2D" parent="horse"]
+show_behind_parent = true
+position = Vector2( -126.638, 89.9283 )
+script = ExtResource( 2 )
+use_constraints = true
+target = NodePath("../../targeting_system_loop/targets/t02")
+
+[node name="arm" type="Node2D" parent="horse/front_r"]
+show_behind_parent = true
+script = ExtResource( 1 )
+angle_start = 28.973
+angle_width = 163.973
+
+[node name="arm" type="Sprite" parent="horse/front_r/arm"]
+show_behind_parent = true
+position = Vector2( -0.272461, -0.0234985 )
+texture = ExtResource( 5 )
+offset = Vector2( 0.841858, 57.2455 )
+
+[node name="forearm" type="Node2D" parent="horse/front_r"]
+show_behind_parent = true
+position = Vector2( -0.125, 155.934 )
+script = ExtResource( 1 )
+angle_start = -128.836
+angle_width = 131.918
+
+[node name="forearm" type="Sprite" parent="horse/front_r/forearm"]
+show_behind_parent = true
+position = Vector2( 0.355286, 48.1064 )
+texture = ExtResource( 4 )
+
+[node name="foot" type="Node2D" parent="horse/front_r"]
+show_behind_parent = true
+position = Vector2( -0.268677, 296.896 )
+script = ExtResource( 1 )
+angle_start = -40.069
+
+[node name="foot" type="Sprite" parent="horse/front_r/foot"]
+show_behind_parent = true
+position = Vector2( -1.93286, 6.53381 )
+texture = ExtResource( 7 )
+
+[node name="end" type="Position2D" parent="horse/front_r"]
+show_behind_parent = true
+position = Vector2( 0, 332.995 )
+
+[node name="front_l" type="Node2D" parent="horse"]
+position = Vector2( -236.169, 89.9283 )
+script = ExtResource( 2 )
+use_constraints = true
+target = NodePath("../../targeting_system_loop/targets/t01")
+
+[node name="arm" type="Node2D" parent="horse/front_l"]
+show_behind_parent = true
+script = ExtResource( 1 )
+angle_start = 28.973
+angle_width = 163.973
+
+[node name="arm" type="Sprite" parent="horse/front_l/arm"]
+show_behind_parent = true
+position = Vector2( -0.272461, -0.0234985 )
+texture = ExtResource( 5 )
+offset = Vector2( 0.841858, 57.2455 )
+
+[node name="forearm" type="Node2D" parent="horse/front_l"]
+show_behind_parent = true
+position = Vector2( -0.125, 155.934 )
+script = ExtResource( 1 )
+angle_start = -128.836
+angle_width = 131.918
+
+[node name="forearm" type="Sprite" parent="horse/front_l/forearm"]
+show_behind_parent = true
+position = Vector2( 0.355286, 48.1064 )
+texture = ExtResource( 4 )
+
+[node name="foot" type="Node2D" parent="horse/front_l"]
+show_behind_parent = true
+position = Vector2( -0.268677, 296.896 )
+script = ExtResource( 1 )
+angle_start = -40.069
+
+[node name="foot" type="Sprite" parent="horse/front_l/foot"]
+show_behind_parent = true
+position = Vector2( -1.93286, 6.53381 )
+texture = ExtResource( 7 )
+
+[node name="end" type="Position2D" parent="horse/front_l"]
+show_behind_parent = true
+position = Vector2( 0, 332.995 )
+
+[node name="target_h" type="Position2D" parent="horse"]
+position = Vector2( -566.334, -121.932 )
+scale = Vector2( 2, 2 )
+
+[node name="anim" type="AnimationPlayer" parent="horse/target_h"]
+autoplay = "head_bobbing"
+anims/head_bobbing = SubResource( 2 )
+
+[node name="coll_front" type="CollisionShape2D" parent="horse"]
+position = Vector2( -193.475, 111.918 )
+shape = SubResource( 3 )
+
+[node name="coll_back" type="CollisionShape2D" parent="horse"]
+position = Vector2( 194.247, 89.473 )
+shape = SubResource( 4 )
+
+[node name="target" type="Position2D" parent="."]
+script = SubResource( 5 )
+
+[node name="targeting_snap_to_ground" type="Node2D" parent="."]
+visible = false
+script = ExtResource( 12 )
+active = false
+
+[node name="rays" type="Node2D" parent="targeting_snap_to_ground"]
+
+[node name="r01" type="RayCast2D" parent="targeting_snap_to_ground/rays"]
+position = Vector2( -324.923, 15.9259 )
+enabled = true
+cast_to = Vector2( 0, 40 )
+
+[node name="r02" type="RayCast2D" parent="targeting_snap_to_ground/rays"]
+position = Vector2( -61.1227, -379 )
+enabled = true
+cast_to = Vector2( 0, 40 )
+
+[node name="r03" type="RayCast2D" parent="targeting_snap_to_ground/rays"]
+position = Vector2( 72.5205, -379 )
+enabled = true
+cast_to = Vector2( 0, 40 )
+
+[node name="r04" type="RayCast2D" parent="targeting_snap_to_ground/rays"]
+position = Vector2( 126.26, -379 )
+enabled = true
+cast_to = Vector2( 0, 40 )
+
+[node name="targets" type="Node2D" parent="targeting_snap_to_ground"]
+
+[node name="t01" type="Position2D" parent="targeting_snap_to_ground/targets"]
+position = Vector2( 771.718, 708.718 )
+
+[node name="t02" type="Position2D" parent="targeting_snap_to_ground/targets"]
+position = Vector2( 826.751, 741.596 )
+
+[node name="t03" type="Position2D" parent="targeting_snap_to_ground/targets"]
+position = Vector2( 956.825, 739.446 )
+
+[node name="t04" type="Position2D" parent="targeting_snap_to_ground/targets"]
+position = Vector2( 1014.73, 743.01 )
+
+[node name="targeting_system_loop" type="Node2D" parent="."]
+script = ExtResource( 11 )
+attach_to_node = NodePath("../horse")
+gallop_speed = 1.2
+horse_controller_path = NodePath("../horse/kinematic_controller")
+
+[node name="rays" type="Node2D" parent="targeting_system_loop"]
+position = Vector2( 800, 600 )
+
+[node name="r01" type="RayCast2D" parent="targeting_system_loop/rays"]
+position = Vector2( -116.277, -379 )
+enabled = true
+cast_to = Vector2( 0, 500 )
+
+[node name="r02" type="RayCast2D" parent="targeting_system_loop/rays"]
+position = Vector2( -61.1227, -379 )
+enabled = true
+cast_to = Vector2( 0, 500 )
+
+[node name="r03" type="RayCast2D" parent="targeting_system_loop/rays"]
+position = Vector2( 72.5205, -379 )
+enabled = true
+cast_to = Vector2( 0, 500 )
+
+[node name="r04" type="RayCast2D" parent="targeting_system_loop/rays"]
+position = Vector2( 126.26, -379 )
+enabled = true
+cast_to = Vector2( 0, 500 )
+
+[node name="targets" type="Node2D" parent="targeting_system_loop"]
+
+[node name="t01" type="Position2D" parent="targeting_system_loop/targets"]
+position = Vector2( 771.718, 708.718 )
+
+[node name="t02" type="Position2D" parent="targeting_system_loop/targets"]
+position = Vector2( 826.751, 741.596 )
+
+[node name="t03" type="Position2D" parent="targeting_system_loop/targets"]
+position = Vector2( 956.825, 739.446 )
+
+[node name="t04" type="Position2D" parent="targeting_system_loop/targets"]
+position = Vector2( 1014.73, 743.01 )
+
+[node name="title" type="Label" parent="."]
+anchor_right = 1.0
+margin_bottom = 14.0
+text = "Example Scene"
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}

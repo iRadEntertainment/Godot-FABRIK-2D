@@ -2,7 +2,7 @@
 #     ik.gd     #
 #===============#
 
-extends Node
+extends Reference
 class_name IKNodes
 
 var nodes  = []
@@ -14,6 +14,7 @@ var tot_p = 0
 var n = 0
 var segments  = []
 var nodes_initial_angle = []
+var segments_initial_angle = []
 var lengths = []
 var constraint_angles = []
 
@@ -42,7 +43,9 @@ func set_nodes(_nodes, _angles = null):
 	
 	for i in range (n):
 		segments.append(p[i+1] - p[i])
-#		nodes_initial_angle.append( nodes[i].global_rotation )
+		nodes_initial_angle.append( nodes[i].global_rotation )
+		segments_initial_angle.append( (p[i+1] - p[i]).angle() )
+#		print("p%d angle to p%d = ")
 	
 	for i in range (segments.size()):
 		lengths.append(segments[i].length())
@@ -97,7 +100,7 @@ func reach_target(goal, _init_angle = 0, vel = null): # PROCESSED
 #				apply_constraints(i)
 
 	translate_and_rotate_nodes()
-	return p
+#	return p
 
 
 #============================== CONSTRAINTS ====================================
@@ -208,7 +211,7 @@ func translate_and_rotate_nodes():
 		# apply rotation to nodes
 		if i < n:
 			var dir = p[i+1] - p[i]
-			var rot = dir.angle()
+			var rot = dir.angle() - segments_initial_angle[i] + nodes_initial_angle[i]
 			nodes[i].global_rotation = rot
 		else:
 			nodes[i].global_rotation = nodes[i-1].global_rotation

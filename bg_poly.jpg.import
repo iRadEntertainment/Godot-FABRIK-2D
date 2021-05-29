@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/IKLimb2D.png-47a41911944632425f40a07ac371a322.stex"
+path="res://.import/bg_poly.jpg-a2997c5fc532809fd5f25160db19460e.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://IKLimb2D.png"
-dest_files=[ "res://.import/IKLimb2D.png-47a41911944632425f40a07ac371a322.stex" ]
+source_file="res://bg_poly.jpg"
+dest_files=[ "res://.import/bg_poly.jpg-a2997c5fc532809fd5f25160db19460e.stex" ]
 
 [params]
 
@@ -19,7 +19,7 @@ compress/lossy_quality=0.7
 compress/hdr_mode=0
 compress/bptc_ldr=0
 compress/normal_map=0
-flags/repeat=0
+flags/repeat=1
 flags/filter=true
 flags/mipmaps=false
 flags/anisotropic=false

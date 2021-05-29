@@ -1,0 +1,311 @@
+[gd_scene load_steps=10 format=2]
+
+[ext_resource path="res://addons/textures/line_dotted.png" type="Texture" id=1]
+[ext_resource path="res://addons/textures/line_dashed.png" type="Texture" id=2]
+[ext_resource path="res://addons/textures/point.png" type="Texture" id=3]
+[ext_resource path="res://Alatsi-Regular.ttf" type="DynamicFontData" id=4]
+[ext_resource path="res://fabrik.gd" type="Script" id=5]
+[ext_resource path="res://addons/textures/line.png" type="Texture" id=6]
+
+[sub_resource type="DynamicFont" id=1]
+size = 48
+font_data = ExtResource( 4 )
+
+[sub_resource type="GDScript" id=2]
+script/source = "extends Sprite
+
+
+
+func _ready():
+	pass # Replace with function body.
+
+func _process(_delta):
+	
+	update()
+
+func _draw():
+	pass
+"
+
+[sub_resource type="DynamicFont" id=3]
+size = 20
+font_data = ExtResource( 4 )
+
+[node name="fabrik" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+script = ExtResource( 5 )
+__meta__ = {
+"_edit_lock_": true,
+"_edit_use_anchors_": false
+}
+
+[node name="bg" type="ColorRect" parent="."]
+margin_right = 1684.0
+margin_bottom = 1024.0
+color = Color( 0.054902, 0.0745098, 0.109804, 1 )
+__meta__ = {
+"_edit_lock_": true,
+"_edit_use_anchors_": false
+}
+
+[node name="base" type="ColorRect" parent="."]
+visible = false
+margin_top = 962.0
+margin_right = 1684.0
+margin_bottom = 1024.0
+color = Color( 0.270588, 0.27451, 0.286275, 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="title" type="Label" parent="."]
+margin_left = 14.0
+margin_top = 12.0
+margin_right = 418.0
+margin_bottom = 74.0
+custom_fonts/font = SubResource( 1 )
+text = "FABRIK explanation"
+__meta__ = {
+"_edit_lock_": true,
+"_edit_use_anchors_": false
+}
+
+[node name="lines" type="Node2D" parent="."]
+position = Vector2( 36, 100 )
+
+[node name="line" type="Line2D" parent="lines"]
+points = PoolVector2Array( 0, 0, 150, 0 )
+default_color = Color( 1, 1, 1, 1 )
+texture = ExtResource( 6 )
+texture_mode = 1
+
+[node name="line_dot" type="Line2D" parent="lines"]
+position = Vector2( 0, 25 )
+points = PoolVector2Array( 0, 0, 150, 0 )
+default_color = Color( 1, 1, 1, 1 )
+texture = ExtResource( 1 )
+texture_mode = 1
+
+[node name="line_dash" type="Line2D" parent="lines"]
+position = Vector2( 0, 50 )
+points = PoolVector2Array( 0, 0, 150, 0 )
+default_color = Color( 1, 1, 1, 1 )
+texture = ExtResource( 2 )
+texture_mode = 1
+
+[node name="lengths" type="Node2D" parent="."]
+modulate = Color( 0.521569, 0.486275, 0.486275, 0.662745 )
+
+[node name="directions" type="Node2D" parent="."]
+modulate = Color( 0.705882, 0.705882, 0.705882, 0.866667 )
+
+[node name="points" type="Node2D" parent="."]
+
+[node name="00" type="Sprite" parent="points"]
+position = Vector2( 808.073, 774.083 )
+texture = ExtResource( 3 )
+script = SubResource( 2 )
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="lb" type="Label" parent="points/00"]
+margin_left = -20.9763
+margin_top = 7.49152
+margin_right = 19.0237
+margin_bottom = 21.4915
+custom_fonts/font = SubResource( 3 )
+text = "p0"
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="01" type="Sprite" parent="points"]
+position = Vector2( 837.267, 692.082 )
+texture = ExtResource( 3 )
+script = SubResource( 2 )
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="lb" type="Label" parent="points/01"]
+margin_left = -20.9763
+margin_top = 7.49152
+margin_right = 19.0237
+margin_bottom = 21.4915
+custom_fonts/font = SubResource( 3 )
+text = "p1"
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="02" type="Sprite" parent="points"]
+position = Vector2( 918.193, 663.702 )
+texture = ExtResource( 3 )
+script = SubResource( 2 )
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="lb" type="Label" parent="points/02"]
+margin_left = -20.9763
+margin_top = 7.49152
+margin_right = 19.0237
+margin_bottom = 21.4915
+custom_fonts/font = SubResource( 3 )
+text = "p2"
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="03" type="Sprite" parent="points"]
+position = Vector2( 1020.27, 594.387 )
+texture = ExtResource( 3 )
+script = SubResource( 2 )
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="lb" type="Label" parent="points/03"]
+margin_left = -20.9763
+margin_top = 7.49152
+margin_right = 19.0237
+margin_bottom = 21.4915
+custom_fonts/font = SubResource( 3 )
+text = "p3"
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="04" type="Sprite" parent="points"]
+position = Vector2( 1099.56, 563.206 )
+texture = ExtResource( 3 )
+script = SubResource( 2 )
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="lb" type="Label" parent="points/04"]
+margin_left = -20.9763
+margin_top = 7.49152
+margin_right = 19.0237
+margin_bottom = 21.4915
+custom_fonts/font = SubResource( 3 )
+text = "p4"
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="05" type="Sprite" parent="points"]
+position = Vector2( 1103.12, 504.407 )
+texture = ExtResource( 3 )
+script = SubResource( 2 )
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="lb" type="Label" parent="points/05"]
+margin_left = -20.9763
+margin_top = 7.49152
+margin_right = 19.0237
+margin_bottom = 21.4915
+custom_fonts/font = SubResource( 3 )
+text = "p5"
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="06" type="Sprite" parent="points"]
+position = Vector2( 1016.7, 419.771 )
+texture = ExtResource( 3 )
+script = SubResource( 2 )
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="lb" type="Label" parent="points/06"]
+margin_left = -21.0
+margin_top = 7.0
+margin_right = 19.0
+margin_bottom = 33.0
+custom_fonts/font = SubResource( 3 )
+text = "p6"
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="end" type="Sprite" parent="points"]
+position = Vector2( 960.806, 376.345 )
+texture = ExtResource( 3 )
+script = SubResource( 2 )
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="lb" type="Label" parent="points/end"]
+margin_left = -20.9763
+margin_top = 7.49152
+margin_right = 19.0237
+margin_bottom = 21.4915
+custom_fonts/font = SubResource( 3 )
+text = "end"
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="root" type="Sprite" parent="."]
+modulate = Color( 0.898039, 0.266667, 0.25098, 1 )
+position = Vector2( 872.291, 756.543 )
+texture = ExtResource( 3 )
+script = SubResource( 2 )
+
+[node name="lb" type="Label" parent="root"]
+margin_left = -20.9763
+margin_top = 27.4915
+margin_right = 19.0237
+margin_bottom = 48.4915
+custom_fonts/font = SubResource( 3 )
+text = "root"
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="goal" type="Sprite" parent="."]
+modulate = Color( 0.0352941, 0.819608, 0.321569, 1 )
+position = Vector2( 830.819, 377.367 )
+texture = ExtResource( 3 )
+script = SubResource( 2 )
+
+[node name="lb" type="Label" parent="goal"]
+margin_left = -20.9763
+margin_top = 21.2645
+margin_right = 19.0237
+margin_bottom = 47.2645
+custom_fonts/font = SubResource( 3 )
+text = "goal"
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="tw" type="Tween" parent="."]

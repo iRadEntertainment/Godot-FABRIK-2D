@@ -1,11 +1,11 @@
 tool
 extends Node2D
-class_name IKBoneConstraint2D, "res://IKBoneConstraint2D.png"
+class_name IKBoneConstraint2D, "res://addons/IKFabrikGodot2D/IKBoneConstraint2D.png"
 
-export (float, -360, 360) var angle_start = -45 setget _start_changed
-export (float, 0, 360) var angle_width = 90 setget _width_changed
+export (float, -360, 360) var angle_start = -45
+export (float, 0, 360) var angle_width = 90
 
-var view_angles := true setget _view_angles_changed
+var view_angles := true
 
 var points : PoolVector2Array
 var visibility_radius := 30
@@ -13,24 +13,12 @@ var a0
 var a1
 var a_width
 
-func _ready():
-	owner = get_parent()
 
-func _start_changed(val):
-	angle_start = val
+
+func _process(delta):
 	draw_angle()
-func _width_changed(val):
-	angle_width = val
-	draw_angle()
-func _view_angles_changed(val):
-	view_angles = val
-	draw_angle()
-	
 
 func draw_angle():
-	if true:
-		# do nothing
-		return
 	a0 = deg2rad(angle_start) - global_rotation
 	a_width = deg2rad(angle_width)
 	

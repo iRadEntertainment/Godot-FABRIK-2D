@@ -7,7 +7,8 @@ var a  = 0
 var circle_radius = 150
 var origin_offset = Vector2(0, -10)
 
-onready var origin = $clock.position
+onready var origin = $clock.global_position
+var window_size : Vector2
 
 #====================== FUNCTIONS TO BE CHECKED ================================
 func angle_in_range():#ANTO
@@ -74,11 +75,13 @@ func _ready():
 	$controls/vbox/a0/sld.connect("value_changed", self, "a0_changed")
 	$controls/vbox/a_width/sld.connect("value_changed", self, "a_width_changed")
 	$controls/vbox/a/sld.connect("value_changed", self, "a_changed")
+	
+	window_size = get_viewport_rect().size
 	update_graphics()
 
 
 func update_graphics():
-	origin = rect_size/2 + origin_offset
+	origin = window_size/2 + origin_offset - rect_global_position
 	$clock.position = origin
 	$clock/a0.rotation = a0
 	$clock/a0.points = [Vector2.ZERO, Vector2.RIGHT*circle_radius]
@@ -94,16 +97,12 @@ func update_graphics():
 	$controls/vbox/a/sld.value = a
 	$controls/vbox/a/val.text = "%.2f"%(a)
 	
-#	var a0_deg = (a0)*(360/(2*PI))#ANTO
-#	var a1_deg = (a1)*(360/(2*PI))#ANTO
-#	var a_deg = (a)*(360/(2*PI))#ANTO
-	
 	$float_lbs/a0.rect_position = origin + Vector2(cos(a0), sin(a0))*circle_radius + Vector2(cos(a0), sin(a0))*40
-	$float_lbs/a0.text = "a0: %.2f"%a0#ANTO
+	$float_lbs/a0.text = "a0: %.2f"%a0
 	$float_lbs/a1.rect_position = origin + Vector2(cos(a1), sin(a1))*circle_radius + Vector2(cos(a1), sin(a1))*40
-	$float_lbs/a1.text = "a1: %.2f"%a1#ANTO
+	$float_lbs/a1.text = "a1: %.2f"%a1
 	$float_lbs/a.rect_position  = origin + Vector2(cos(a), sin(a))*circle_radius + Vector2(cos(a), sin(a))*40
-	$float_lbs/a.text = "a: %.2f"%a#ANTO
+	$float_lbs/a.text = "a: %.2f"%a
 	
 	# checks
 	$controls/vbox/in_range/bg.color = Color.limegreen if angle_in_range() else Color.brown
@@ -117,8 +116,8 @@ func update_graphics():
 	update()
 func _draw():
 	# draw origin cross and circle
-	draw_line(Vector2(origin.x, 0), Vector2(origin.x, rect_size.y), Color.aliceblue)
-	draw_line(Vector2(0, origin.y), Vector2(rect_size.x, origin.y), Color.aliceblue)
+	draw_line(Vector2(origin.x, 0), Vector2(origin.x, window_size.y), Color.aliceblue)
+	draw_line(Vector2(0, origin.y), Vector2(window_size.x, origin.y), Color.aliceblue)
 	draw_arc(origin, circle_radius, 0, 2*PI, 360, Color.aliceblue)
 	
 	# draw range
@@ -165,7 +164,6 @@ var shift_pressed = false
 var ctrl_pressed = false
 func _input(event):
 	if event is InputEventKey:
-#		print(event.scancode)
 		if event.scancode == KEY_CONTROL:
 			ctrl_pressed = event.is_pressed()
 		if event.scancode == KEY_SHIFT:
@@ -177,17 +175,17 @@ func _on_angles_gui_input(event):
 			mouse_left_down = event.is_pressed()
 			if event.is_pressed():
 				if shift_pressed:
-					a0 = get_global_mouse_position().angle_to_point(origin)
+					a0 = get_global_mouse_position().angle_to_point(origin - rect_global_position)
 				elif ctrl_pressed:
-					a_width = get_global_mouse_position().angle_to_point(origin) - a0
+					a_width = get_global_mouse_position().angle_to_point(origin - rect_global_position) - a0
 				else:
-					a = get_global_mouse_position().angle_to_point(origin)
+					a = get_global_mouse_position().angle_to_point(origin - rect_global_position)
 				update_graphics()
 			
 		if event.button_index == BUTTON_RIGHT:
 			mouse_right_down = event.is_pressed()
 			if event.is_pressed():
-				var new_origin_offset = get_global_mouse_position() - rect_size/2
+				var new_origin_offset = get_global_mouse_position() - window_size/2
 				$tw.interpolate_property(self, "origin_offset", origin_offset, new_origin_offset, 0.15, Tween.TRANS_CUBIC, Tween.EASE_IN_OUT)
 				$tw.start()
 		elif event.button_index == BUTTON_WHEEL_UP and event.is_pressed():
@@ -206,12 +204,9 @@ func _on_angles_gui_input(event):
 				a = get_global_mouse_position().angle_to_point(origin)
 			update_graphics()
 		if mouse_right_down:
-			origin_offset = get_global_mouse_position() - rect_size/2
+			origin_offset = get_global_mouse_position() - window_size/2
 		update_graphics()
 
 func _process(delta):
 	if $tw.is_active():
 		update_graphics()
-#	shift_pressed = Input.is_key_pressed(KEY_SHIFT)
-#	ctrl_pressed = Input.is_key_pressed(KEY_CONTROL)
-

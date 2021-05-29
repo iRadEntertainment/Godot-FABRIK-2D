@@ -1,6 +1,6 @@
 tool
 extends Node2D
-class_name IKLimb2D, "res://IKLimb2D.png"
+class_name IKLimb2D, "res://addons/IKFabrikGodot2D/IKLimb2D.png"
 
 
 export var reach := true
@@ -10,7 +10,7 @@ export var reach_velocity : int = 0
 export var view_angles := true setget _view_angles_changed
 export var view_bones := true setget _view_bones_changed
 
-export (NodePath) var target
+export (NodePath) var target setget _set_target
 var target_node
 
 var contact := false
@@ -18,6 +18,7 @@ export (int) var contact_threshold = 5
 var IK : IKNodes
 
 
+#============================== DRAW UTILS =====================================
 func _view_angles_changed(val):
 	view_angles = val
 	for child in get_children():
@@ -37,11 +38,17 @@ func _draw():
 				get_child(i).show_behind_parent = view_bones
 
 
+#==================================== INIT =====================================
 func _ready():
 	set_process(false)
+	set_chain()
+
+
+func set_chain():
 	if not Engine.editor_hint:
 		if get_child_count() == 0:
 			return
+		
 		# set IK
 		IK = IKNodes.new()
 		var nodes : Array = []
@@ -69,6 +76,8 @@ func _ready():
 		else:
 			IK.set_nodes(nodes)
 		if target:
+			if target:
+				pass
 			target_node = get_node(target)
 		else:
 			set_process(false)
@@ -87,6 +96,17 @@ func _process(delta):
 			else:
 				IK.reach_target(pos, global_rotation)
 			contact = IK.contact
+
+func _physics_process(delta):
+	if Engine.editor_hint:
+		update()
+
+
+# =============================== SETGETS ======================================
+func _set_target(value):
+	target = value
+	set_chain()
+
 
 # ============================== WARNINGS ======================================
 func _get_configuration_warning() -> String:
