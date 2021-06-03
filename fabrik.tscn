@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=2]
+[gd_scene load_steps=12 format=2]
 
 [ext_resource path="res://addons/textures/line_dotted.png" type="Texture" id=1]
 [ext_resource path="res://addons/textures/line_dashed.png" type="Texture" id=2]
@@ -6,9 +6,14 @@
 [ext_resource path="res://Alatsi-Regular.ttf" type="DynamicFontData" id=4]
 [ext_resource path="res://fabrik.gd" type="Script" id=5]
 [ext_resource path="res://addons/textures/line.png" type="Texture" id=6]
+[ext_resource path="res://world.tres" type="Theme" id=7]
 
 [sub_resource type="DynamicFont" id=1]
 size = 48
+font_data = ExtResource( 4 )
+
+[sub_resource type="DynamicFont" id=4]
+size = 24
 font_data = ExtResource( 4 )
 
 [sub_resource type="GDScript" id=2]
@@ -34,6 +39,7 @@ font_data = ExtResource( 4 )
 [node name="fabrik" type="Control"]
 anchor_right = 1.0
 anchor_bottom = 1.0
+theme = ExtResource( 7 )
 script = ExtResource( 5 )
 __meta__ = {
 "_edit_lock_": true,
@@ -41,21 +47,12 @@ __meta__ = {
 }
 
 [node name="bg" type="ColorRect" parent="."]
-margin_right = 1684.0
-margin_bottom = 1024.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+mouse_filter = 2
 color = Color( 0.054902, 0.0745098, 0.109804, 1 )
 __meta__ = {
 "_edit_lock_": true,
-"_edit_use_anchors_": false
-}
-
-[node name="base" type="ColorRect" parent="."]
-visible = false
-margin_top = 962.0
-margin_right = 1684.0
-margin_bottom = 1024.0
-color = Color( 0.270588, 0.27451, 0.286275, 1 )
-__meta__ = {
 "_edit_use_anchors_": false
 }
 
@@ -68,6 +65,120 @@ custom_fonts/font = SubResource( 1 )
 text = "FABRIK explanation"
 __meta__ = {
 "_edit_lock_": true,
+"_edit_use_anchors_": false
+}
+
+[node name="buttons" type="VBoxContainer" parent="."]
+margin_left = 21.0
+margin_top = 215.0
+margin_right = 315.0
+margin_bottom = 346.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="delete_points" type="Button" parent="buttons"]
+margin_right = 328.0
+margin_bottom = 42.0
+focus_mode = 0
+enabled_focus_mode = 0
+text = "Delete all points"
+
+[node name="add_points" type="Button" parent="buttons"]
+margin_top = 46.0
+margin_right = 328.0
+margin_bottom = 88.0
+focus_mode = 0
+toggle_mode = true
+enabled_focus_mode = 0
+text = "Add/delete points"
+
+[node name="iterations" type="VBoxContainer" parent="."]
+margin_left = 212.0
+margin_top = 93.0
+margin_right = 422.0
+margin_bottom = 159.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="per_click" type="HBoxContainer" parent="iterations"]
+margin_right = 261.0
+margin_bottom = 31.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="lb" type="Label" parent="iterations/per_click"]
+margin_right = 198.0
+margin_bottom = 31.0
+custom_fonts/font = SubResource( 4 )
+text = "Iterations per click:"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="value" type="Label" parent="iterations/per_click"]
+margin_left = 202.0
+margin_right = 210.0
+margin_bottom = 31.0
+custom_fonts/font = SubResource( 4 )
+text = "1"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="tot" type="HBoxContainer" parent="iterations"]
+margin_top = 35.0
+margin_right = 261.0
+margin_bottom = 66.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="lb" type="Label" parent="iterations/tot"]
+margin_right = 249.0
+margin_bottom = 31.0
+custom_fonts/font = SubResource( 4 )
+text = "Iterations (points) total:"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="value" type="Label" parent="iterations/tot"]
+margin_left = 253.0
+margin_right = 261.0
+margin_bottom = 31.0
+custom_fonts/font = SubResource( 4 )
+text = "1"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="chain" type="HBoxContainer" parent="iterations"]
+margin_top = 70.0
+margin_right = 261.0
+margin_bottom = 101.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="lb" type="Label" parent="iterations/chain"]
+margin_right = 241.0
+margin_bottom = 31.0
+custom_fonts/font = SubResource( 4 )
+text = "Iterations (chain) total:"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="value" type="Label" parent="iterations/chain"]
+margin_left = 245.0
+margin_right = 259.0
+margin_bottom = 31.0
+custom_fonts/font = SubResource( 4 )
+text = "0"
+__meta__ = {
 "_edit_use_anchors_": false
 }
 
@@ -95,10 +206,97 @@ texture = ExtResource( 2 )
 texture_mode = 1
 
 [node name="lengths" type="Node2D" parent="."]
-modulate = Color( 0.521569, 0.486275, 0.486275, 0.662745 )
+modulate = Color( 0.917647, 0.505882, 0.505882, 1 )
 
 [node name="directions" type="Node2D" parent="."]
 modulate = Color( 0.705882, 0.705882, 0.705882, 0.866667 )
+
+[node name="points_little" type="Node2D" parent="."]
+visible = false
+
+[node name="00" type="Sprite" parent="points_little"]
+position = Vector2( 728.378, 677.551 )
+texture = ExtResource( 3 )
+script = SubResource( 2 )
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="lb" type="Label" parent="points_little/00"]
+margin_left = -20.9763
+margin_top = 7.49152
+margin_right = 19.0237
+margin_bottom = 21.4915
+custom_fonts/font = SubResource( 3 )
+text = "p0"
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="01" type="Sprite" parent="points_little"]
+position = Vector2( 837.267, 692.082 )
+texture = ExtResource( 3 )
+script = SubResource( 2 )
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="lb" type="Label" parent="points_little/01"]
+margin_left = -20.9763
+margin_top = 7.49152
+margin_right = 19.0237
+margin_bottom = 21.4915
+custom_fonts/font = SubResource( 3 )
+text = "p1"
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="02" type="Sprite" parent="points_little"]
+position = Vector2( 918.193, 663.702 )
+texture = ExtResource( 3 )
+script = SubResource( 2 )
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="lb" type="Label" parent="points_little/02"]
+margin_left = -20.9763
+margin_top = 7.49152
+margin_right = 19.0237
+margin_bottom = 21.4915
+custom_fonts/font = SubResource( 3 )
+text = "p2"
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="end" type="Sprite" parent="points_little"]
+position = Vector2( 939.479, 486.346 )
+texture = ExtResource( 3 )
+script = SubResource( 2 )
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="lb" type="Label" parent="points_little/end"]
+margin_left = -20.9763
+margin_top = 7.49152
+margin_right = 19.0237
+margin_bottom = 21.4915
+custom_fonts/font = SubResource( 3 )
+text = "end"
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="points" type="Node2D" parent="."]
 
@@ -272,7 +470,7 @@ __meta__ = {
 
 [node name="root" type="Sprite" parent="."]
 modulate = Color( 0.898039, 0.266667, 0.25098, 1 )
-position = Vector2( 872.291, 756.543 )
+position = Vector2( 711.929, 750.307 )
 texture = ExtResource( 3 )
 script = SubResource( 2 )
 
@@ -309,3 +507,5 @@ __meta__ = {
 }
 
 [node name="tw" type="Tween" parent="."]
+
+[connection signal="gui_input" from="." to="." method="_on_fabrik_gui_input"]

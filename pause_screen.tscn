@@ -24,7 +24,7 @@ func _process(delta):
 	$vb/time_left.text = \"%02d:%02d\"%[time_int/60, time_int%60]
 "
 
-[sub_resource type="DynamicFont" id=6]
+[sub_resource type="DynamicFont" id=2]
 size = 72
 font_data = ExtResource( 2 )
 
@@ -82,7 +82,7 @@ __meta__ = {
 margin_top = 31.0
 margin_right = 1680.0
 margin_bottom = 124.0
-custom_fonts/font = SubResource( 6 )
+custom_fonts/font = SubResource( 2 )
 custom_colors/font_color = Color( 0.964706, 0.835294, 0.360784, 1 )
 text = "Streaming paused, have a break!"
 align = 1
@@ -111,263 +111,276 @@ text = "5:00"
 align = 1
 valign = 1
 
-[node name="running" type="Node2D" parent="."]
-position = Vector2( 0, -100.006 )
+[node name="centered" type="CenterContainer" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_top = 139.0
+margin_bottom = -295.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
-[node name="horse" type="Sprite" parent="running"]
-position = Vector2( 881.578, 430.407 )
+[node name="running" type="Control" parent="centered"]
+margin_left = 840.0
+margin_top = 295.0
+margin_right = 840.0
+margin_bottom = 295.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="horse" type="Sprite" parent="centered/running"]
 scale = Vector2( 0.5, 0.5 )
 texture = ExtResource( 10 )
 
-[node name="head" type="Node2D" parent="running/horse"]
+[node name="head" type="Node2D" parent="centered/running/horse"]
 position = Vector2( -238.815, -63.0672 )
 script = ExtResource( 5 )
 use_constraints = true
 target = NodePath("../target_h")
 
-[node name="neck" type="Node2D" parent="running/horse/head"]
+[node name="neck" type="Node2D" parent="centered/running/horse/head"]
 show_behind_parent = true
 position = Vector2( -3.25, -3.25 )
 script = ExtResource( 3 )
 angle_start = 142.397
 
-[node name="head" type="Sprite" parent="running/horse/head/neck"]
+[node name="head" type="Sprite" parent="centered/running/horse/head/neck"]
 show_behind_parent = true
 position = Vector2( -74.4448, -46.043 )
 texture = ExtResource( 8 )
 
-[node name="end" type="Position2D" parent="running/horse/head"]
+[node name="end" type="Position2D" parent="centered/running/horse/head"]
 show_behind_parent = true
 position = Vector2( -113.5, -19.222 )
 
-[node name="rear_r" type="Node2D" parent="running/horse"]
+[node name="rear_r" type="Node2D" parent="centered/running/horse"]
 show_behind_parent = true
 position = Vector2( 244.639, 89.9283 )
 script = ExtResource( 5 )
 use_constraints = true
 target = NodePath("../../targeting_system/targets/t04")
 
-[node name="arm" type="Node2D" parent="running/horse/rear_r"]
+[node name="arm" type="Node2D" parent="centered/running/horse/rear_r"]
 show_behind_parent = true
 script = ExtResource( 3 )
 angle_start = 28.973
 angle_width = 163.973
 
-[node name="arm" type="Sprite" parent="running/horse/rear_r/arm"]
+[node name="arm" type="Sprite" parent="centered/running/horse/rear_r/arm"]
 show_behind_parent = true
 position = Vector2( -0.272461, -0.0234985 )
 texture = ExtResource( 6 )
 offset = Vector2( 0.841858, 57.2455 )
 
-[node name="forearm" type="Node2D" parent="running/horse/rear_r"]
+[node name="forearm" type="Node2D" parent="centered/running/horse/rear_r"]
 show_behind_parent = true
 position = Vector2( -0.125, 155.934 )
 script = ExtResource( 3 )
 angle_start = -128.836
 angle_width = 131.918
 
-[node name="forearm" type="Sprite" parent="running/horse/rear_r/forearm"]
+[node name="forearm" type="Sprite" parent="centered/running/horse/rear_r/forearm"]
 show_behind_parent = true
 position = Vector2( 0.355286, 48.1064 )
 texture = ExtResource( 7 )
 
-[node name="foot" type="Node2D" parent="running/horse/rear_r"]
+[node name="foot" type="Node2D" parent="centered/running/horse/rear_r"]
 show_behind_parent = true
 position = Vector2( -0.268677, 296.896 )
 script = ExtResource( 3 )
 angle_start = -40.069
 
-[node name="foot" type="Sprite" parent="running/horse/rear_r/foot"]
+[node name="foot" type="Sprite" parent="centered/running/horse/rear_r/foot"]
 show_behind_parent = true
 position = Vector2( -1.93286, 6.53381 )
 texture = ExtResource( 9 )
 
-[node name="end" type="Position2D" parent="running/horse/rear_r"]
+[node name="end" type="Position2D" parent="centered/running/horse/rear_r"]
 show_behind_parent = true
 position = Vector2( 0, 332.995 )
 
-[node name="rear_l" type="Node2D" parent="running/horse"]
+[node name="rear_l" type="Node2D" parent="centered/running/horse"]
 position = Vector2( 137.045, 89.9283 )
 script = ExtResource( 5 )
 use_constraints = true
 target = NodePath("../../targeting_system/targets/t03")
 
-[node name="arm" type="Node2D" parent="running/horse/rear_l"]
+[node name="arm" type="Node2D" parent="centered/running/horse/rear_l"]
 show_behind_parent = true
 script = ExtResource( 3 )
 angle_start = 28.973
 angle_width = 163.973
 
-[node name="arm" type="Sprite" parent="running/horse/rear_l/arm"]
+[node name="arm" type="Sprite" parent="centered/running/horse/rear_l/arm"]
 show_behind_parent = true
 position = Vector2( -0.272461, -0.0234985 )
 texture = ExtResource( 6 )
 offset = Vector2( 0.841858, 57.2455 )
 
-[node name="forearm" type="Node2D" parent="running/horse/rear_l"]
+[node name="forearm" type="Node2D" parent="centered/running/horse/rear_l"]
 show_behind_parent = true
 position = Vector2( -0.125, 155.934 )
 script = ExtResource( 3 )
 angle_start = -128.836
 angle_width = 131.918
 
-[node name="forearm" type="Sprite" parent="running/horse/rear_l/forearm"]
+[node name="forearm" type="Sprite" parent="centered/running/horse/rear_l/forearm"]
 show_behind_parent = true
 position = Vector2( 0.355286, 48.1064 )
 texture = ExtResource( 7 )
 
-[node name="foot" type="Node2D" parent="running/horse/rear_l"]
+[node name="foot" type="Node2D" parent="centered/running/horse/rear_l"]
 show_behind_parent = true
 position = Vector2( -0.268677, 296.896 )
 script = ExtResource( 3 )
 angle_start = -40.069
 
-[node name="foot" type="Sprite" parent="running/horse/rear_l/foot"]
+[node name="foot" type="Sprite" parent="centered/running/horse/rear_l/foot"]
 show_behind_parent = true
 position = Vector2( -1.93286, 6.53381 )
 texture = ExtResource( 9 )
 
-[node name="end" type="Position2D" parent="running/horse/rear_l"]
+[node name="end" type="Position2D" parent="centered/running/horse/rear_l"]
 show_behind_parent = true
 position = Vector2( 0, 332.995 )
 
-[node name="front_r" type="Node2D" parent="running/horse"]
+[node name="front_r" type="Node2D" parent="centered/running/horse"]
 show_behind_parent = true
 position = Vector2( -126.638, 89.9283 )
 script = ExtResource( 5 )
 use_constraints = true
 target = NodePath("../../targeting_system/targets/t02")
 
-[node name="arm" type="Node2D" parent="running/horse/front_r"]
+[node name="arm" type="Node2D" parent="centered/running/horse/front_r"]
 show_behind_parent = true
 script = ExtResource( 3 )
 angle_start = 28.973
 angle_width = 163.973
 
-[node name="arm" type="Sprite" parent="running/horse/front_r/arm"]
+[node name="arm" type="Sprite" parent="centered/running/horse/front_r/arm"]
 show_behind_parent = true
 position = Vector2( -0.272461, -0.0234985 )
 texture = ExtResource( 6 )
 offset = Vector2( 0.841858, 57.2455 )
 
-[node name="forearm" type="Node2D" parent="running/horse/front_r"]
+[node name="forearm" type="Node2D" parent="centered/running/horse/front_r"]
 show_behind_parent = true
 position = Vector2( -0.125, 155.934 )
 script = ExtResource( 3 )
 angle_start = -128.836
 angle_width = 131.918
 
-[node name="forearm" type="Sprite" parent="running/horse/front_r/forearm"]
+[node name="forearm" type="Sprite" parent="centered/running/horse/front_r/forearm"]
 show_behind_parent = true
 position = Vector2( 0.355286, 48.1064 )
 texture = ExtResource( 7 )
 
-[node name="foot" type="Node2D" parent="running/horse/front_r"]
+[node name="foot" type="Node2D" parent="centered/running/horse/front_r"]
 show_behind_parent = true
 position = Vector2( -0.268677, 296.896 )
 script = ExtResource( 3 )
 angle_start = -40.069
 
-[node name="foot" type="Sprite" parent="running/horse/front_r/foot"]
+[node name="foot" type="Sprite" parent="centered/running/horse/front_r/foot"]
 show_behind_parent = true
 position = Vector2( -1.93286, 6.53381 )
 texture = ExtResource( 9 )
 
-[node name="end" type="Position2D" parent="running/horse/front_r"]
+[node name="end" type="Position2D" parent="centered/running/horse/front_r"]
 show_behind_parent = true
 position = Vector2( 0, 332.995 )
 
-[node name="front_l" type="Node2D" parent="running/horse"]
+[node name="front_l" type="Node2D" parent="centered/running/horse"]
 position = Vector2( -236.169, 89.9283 )
 script = ExtResource( 5 )
 use_constraints = true
 target = NodePath("../../targeting_system/targets/t01")
 
-[node name="arm" type="Node2D" parent="running/horse/front_l"]
+[node name="arm" type="Node2D" parent="centered/running/horse/front_l"]
 show_behind_parent = true
 script = ExtResource( 3 )
 angle_start = 28.973
 angle_width = 163.973
 
-[node name="arm" type="Sprite" parent="running/horse/front_l/arm"]
+[node name="arm" type="Sprite" parent="centered/running/horse/front_l/arm"]
 show_behind_parent = true
 position = Vector2( -0.272461, -0.0234985 )
 texture = ExtResource( 6 )
 offset = Vector2( 0.841858, 57.2455 )
 
-[node name="forearm" type="Node2D" parent="running/horse/front_l"]
+[node name="forearm" type="Node2D" parent="centered/running/horse/front_l"]
 show_behind_parent = true
 position = Vector2( -0.125, 155.934 )
 script = ExtResource( 3 )
 angle_start = -128.836
 angle_width = 131.918
 
-[node name="forearm" type="Sprite" parent="running/horse/front_l/forearm"]
+[node name="forearm" type="Sprite" parent="centered/running/horse/front_l/forearm"]
 show_behind_parent = true
 position = Vector2( 0.355286, 48.1064 )
 texture = ExtResource( 7 )
 
-[node name="foot" type="Node2D" parent="running/horse/front_l"]
+[node name="foot" type="Node2D" parent="centered/running/horse/front_l"]
 show_behind_parent = true
 position = Vector2( -0.268677, 296.896 )
 script = ExtResource( 3 )
 angle_start = -40.069
 
-[node name="foot" type="Sprite" parent="running/horse/front_l/foot"]
+[node name="foot" type="Sprite" parent="centered/running/horse/front_l/foot"]
 show_behind_parent = true
 position = Vector2( -1.93286, 6.53381 )
 texture = ExtResource( 9 )
 
-[node name="end" type="Position2D" parent="running/horse/front_l"]
+[node name="end" type="Position2D" parent="centered/running/horse/front_l"]
 show_behind_parent = true
 position = Vector2( 0, 332.995 )
 
-[node name="target_h" type="Position2D" parent="running/horse"]
+[node name="target_h" type="Position2D" parent="centered/running/horse"]
 position = Vector2( -566.334, -121.932 )
 scale = Vector2( 2, 2 )
 
-[node name="anim" type="AnimationPlayer" parent="running/horse/target_h"]
+[node name="anim" type="AnimationPlayer" parent="centered/running/horse/target_h"]
 autoplay = "head_bobbing"
 anims/head_bobbing = SubResource( 5 )
 
-[node name="targeting_system" type="Node2D" parent="running"]
+[node name="targeting_system" type="Node2D" parent="centered/running"]
 script = ExtResource( 4 )
 show_debug = false
 attach_to_node = NodePath("../horse")
 
-[node name="rays" type="Node2D" parent="running/targeting_system"]
-position = Vector2( 892.912, 632.598 )
+[node name="rays" type="Node2D" parent="centered/running/targeting_system"]
 
-[node name="r01" type="RayCast2D" parent="running/targeting_system/rays"]
+[node name="r01" type="RayCast2D" parent="centered/running/targeting_system/rays"]
 position = Vector2( -121.622, -379 )
 enabled = true
 cast_to = Vector2( 0, 500 )
 
-[node name="r02" type="RayCast2D" parent="running/targeting_system/rays"]
+[node name="r02" type="RayCast2D" parent="centered/running/targeting_system/rays"]
 position = Vector2( -66.468, -379 )
 enabled = true
 cast_to = Vector2( 0, 500 )
 
-[node name="r03" type="RayCast2D" parent="running/targeting_system/rays"]
+[node name="r03" type="RayCast2D" parent="centered/running/targeting_system/rays"]
 position = Vector2( 67.1752, -379 )
 enabled = true
 cast_to = Vector2( 0, 500 )
 
-[node name="r04" type="RayCast2D" parent="running/targeting_system/rays"]
+[node name="r04" type="RayCast2D" parent="centered/running/targeting_system/rays"]
 position = Vector2( 120.915, -379 )
 enabled = true
 cast_to = Vector2( 0, 500 )
 
-[node name="targets" type="Node2D" parent="running/targeting_system"]
+[node name="targets" type="Node2D" parent="centered/running/targeting_system"]
 
-[node name="t01" type="Position2D" parent="running/targeting_system/targets"]
+[node name="t01" type="Position2D" parent="centered/running/targeting_system/targets"]
 position = Vector2( 771.718, 708.718 )
 
-[node name="t02" type="Position2D" parent="running/targeting_system/targets"]
+[node name="t02" type="Position2D" parent="centered/running/targeting_system/targets"]
 position = Vector2( 826.751, 741.596 )
 
-[node name="t03" type="Position2D" parent="running/targeting_system/targets"]
+[node name="t03" type="Position2D" parent="centered/running/targeting_system/targets"]
 position = Vector2( 956.825, 739.446 )
 
-[node name="t04" type="Position2D" parent="running/targeting_system/targets"]
+[node name="t04" type="Position2D" parent="centered/running/targeting_system/targets"]
 position = Vector2( 1014.73, 743.01 )

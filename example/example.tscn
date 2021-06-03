@@ -68,6 +68,7 @@ __meta__ = {
 layer = -1
 
 [node name="bg_color" type="ColorRect" parent="CanvasLayer"]
+visible = false
 anchor_right = 1.0
 anchor_bottom = 1.0
 color = Color( 0.12549, 0.388235, 0.607843, 1 )
@@ -113,7 +114,6 @@ texture = ExtResource( 3 )
 
 [node name="cam" type="Camera2D" parent="horse"]
 position = Vector2( -472, -196 )
-current = true
 limit_top = -10000
 limit_bottom = 1024
 script = SubResource( 1 )
@@ -153,6 +153,7 @@ angle_start = 28.973
 angle_width = 163.973
 
 [node name="arm" type="Sprite" parent="horse/rear_r/arm"]
+visible = false
 show_behind_parent = true
 position = Vector2( -0.272461, -0.0234985 )
 texture = ExtResource( 5 )
@@ -166,6 +167,7 @@ angle_start = -128.836
 angle_width = 131.918
 
 [node name="forearm" type="Sprite" parent="horse/rear_r/forearm"]
+visible = false
 show_behind_parent = true
 position = Vector2( 0.355286, 48.1064 )
 texture = ExtResource( 4 )
@@ -177,6 +179,7 @@ script = ExtResource( 1 )
 angle_start = -40.069
 
 [node name="foot" type="Sprite" parent="horse/rear_r/foot"]
+visible = false
 show_behind_parent = true
 position = Vector2( -1.93286, 6.53381 )
 texture = ExtResource( 7 )
@@ -330,10 +333,12 @@ autoplay = "head_bobbing"
 anims/head_bobbing = SubResource( 2 )
 
 [node name="coll_front" type="CollisionShape2D" parent="horse"]
+visible = false
 position = Vector2( -193.475, 111.918 )
 shape = SubResource( 3 )
 
 [node name="coll_back" type="CollisionShape2D" parent="horse"]
+visible = false
 position = Vector2( 194.247, 89.473 )
 shape = SubResource( 4 )
 

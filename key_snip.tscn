@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=2]
 
-[sub_resource type="GDScript" id=4]
+[sub_resource type="GDScript" id=1]
 script/source = "extends VBoxContainer
 
 
@@ -18,6 +18,9 @@ func _input(event):
 		if event.scancode == KEY_S: $inputs/s.pressed = event.is_pressed()
 		if event.scancode == KEY_D: $inputs/d.pressed = event.is_pressed()
 		if event.scancode == KEY_SPACE: $space.pressed = event.is_pressed()
+		if event.scancode == KEY_SHIFT: $short_keys/shift.pressed = event.is_pressed()
+		if event.scancode == KEY_CONTROL: $short_keys/ctrl.pressed = event.is_pressed()
+		
 		
 "
 
@@ -26,14 +29,14 @@ margin_left = 1508.75
 margin_top = 808.862
 margin_right = 1661.75
 margin_bottom = 938.862
-script = SubResource( 4 )
+script = SubResource( 1 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="inputs" type="GridContainer" parent="."]
 margin_right = 153.0
-margin_bottom = 84.0
+margin_bottom = 80.0
 custom_constants/vseparation = 0
 custom_constants/hseparation = 0
 columns = 3
@@ -42,64 +45,86 @@ __meta__ = {
 }
 
 [node name="q" type="Button" parent="inputs"]
-margin_right = 50.0
-margin_bottom = 42.0
+margin_right = 40.0
+margin_bottom = 40.0
 rect_min_size = Vector2( 40, 40 )
 mouse_filter = 2
 toggle_mode = true
 text = "Q"
 
 [node name="w" type="Button" parent="inputs"]
-margin_left = 50.0
-margin_right = 104.0
-margin_bottom = 42.0
+margin_left = 40.0
+margin_right = 80.0
+margin_bottom = 40.0
 rect_min_size = Vector2( 40, 40 )
 mouse_filter = 2
 toggle_mode = true
 text = "W"
 
 [node name="e" type="Button" parent="inputs"]
-margin_left = 104.0
-margin_right = 153.0
-margin_bottom = 42.0
+margin_left = 80.0
+margin_right = 120.0
+margin_bottom = 40.0
 rect_min_size = Vector2( 40, 40 )
 mouse_filter = 2
 toggle_mode = true
 text = "E"
 
 [node name="a" type="Button" parent="inputs"]
-margin_top = 42.0
-margin_right = 50.0
-margin_bottom = 84.0
+margin_top = 40.0
+margin_right = 40.0
+margin_bottom = 80.0
 rect_min_size = Vector2( 40, 40 )
 mouse_filter = 2
 toggle_mode = true
 text = "A"
 
 [node name="s" type="Button" parent="inputs"]
-margin_left = 50.0
-margin_top = 42.0
-margin_right = 104.0
-margin_bottom = 84.0
+margin_left = 40.0
+margin_top = 40.0
+margin_right = 80.0
+margin_bottom = 80.0
 rect_min_size = Vector2( 40, 40 )
 mouse_filter = 2
 toggle_mode = true
 text = "S"
 
 [node name="d" type="Button" parent="inputs"]
-margin_left = 104.0
-margin_top = 42.0
-margin_right = 153.0
-margin_bottom = 84.0
+margin_left = 80.0
+margin_top = 40.0
+margin_right = 120.0
+margin_bottom = 80.0
 rect_min_size = Vector2( 40, 40 )
 mouse_filter = 2
 toggle_mode = true
 text = "D"
 
 [node name="space" type="Button" parent="."]
-margin_top = 88.0
+margin_top = 84.0
 margin_right = 153.0
-margin_bottom = 130.0
+margin_bottom = 104.0
 mouse_filter = 2
 toggle_mode = true
 text = "SPACE"
+
+[node name="short_keys" type="HBoxContainer" parent="."]
+margin_top = 108.0
+margin_right = 153.0
+margin_bottom = 128.0
+
+[node name="shift" type="Button" parent="short_keys"]
+margin_right = 74.0
+margin_bottom = 20.0
+mouse_filter = 2
+size_flags_horizontal = 3
+toggle_mode = true
+text = "SHIFT"
+
+[node name="ctrl" type="Button" parent="short_keys"]
+margin_left = 78.0
+margin_right = 153.0
+margin_bottom = 20.0
+mouse_filter = 2
+size_flags_horizontal = 3
+toggle_mode = true
+text = "CTRL"

@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=2]
+[gd_scene load_steps=13 format=2]
 
 [ext_resource path="res://no_constr.tscn" type="PackedScene" id=1]
 [ext_resource path="res://constr.tscn" type="PackedScene" id=2]
@@ -17,9 +17,34 @@ script/source = "extends Control
 var scenes = []
 var slide_buttons = []
 
+var roadmap_dic = {
+		\"implementing kinematic chain\" : [true, [], []],
+		\"make class_name for using the script\" : [true, [], []],
+		\"make angle constraints work\" : [true, [
+			\"prevent unexpected result for angles\"
+		], [false]],
+		\"make a FABRIK explanation scene\" : [true, [
+			\"fix the tween animation\",
+			\"fix the segments and construction lines animation\",
+			\"next steps with iterations\",
+			\"add/delete points for demostration\",
+			\"apply constraint logic to the chain\"
+		] , [true, true, true, true, false] ],
+		\"make an example scene\" : [false, [
+			\"create procedural terrain\",
+			\"make an example with procedural animation\",
+			\"make a procedural animation that follow the terrain\",
+		] , [true, true, false]],
+		\"finalize the addon\" : [false, [
+			\"test the addon\",
+			\"publish the addon on the assetLib\"
+		] , [false, false]]
+	}
+
+
 func _ready():
 	# initialize scenes array
-	for scene in $layout/middle/scenes.get_children():
+	for scene in $layout/middle/right/scenes.get_children():
 		scenes.append(scene)
 	
 	
@@ -34,6 +59,34 @@ func _ready():
 		# connect button pressed to \"swow_slide\" passing the index as argument
 		new_button.connect(\"pressed\", self, \"show_slide\", [i])
 		$layout/bottom/slides_ctrl.add_child(new_button)
+	
+	compile_roadmap_tree()
+	$layout/title/btn_road.connect(\"toggled\", self, \"set_roadmap_visible\")
+	$layout/title/btn_road.pressed = $layout/middle/left.visible
+
+
+func compile_roadmap_tree():
+	var tree = $layout/middle/left/roadmap
+	var root = tree.create_item()
+	
+	tree.set_column_expand(0, false)
+	tree.set_column_min_width(0, 48)
+	
+	for key in roadmap_dic.keys():
+		var branch = tree.create_item(root)
+#		var check = tree.create_item(root)
+		
+		
+		branch.set_text(1, key)
+		branch.set_cell_mode(0, TreeItem.CELL_MODE_CHECK)
+		branch.set_checked(0, roadmap_dic[key][0])
+		
+		if not roadmap_dic[key][1].empty():
+			for i in range( roadmap_dic[key][1].size() ):
+				var leaf = tree.create_item(branch)
+				leaf.set_text(1, \"- \"+(roadmap_dic[key][1][i])  )
+				leaf.set_cell_mode(0, TreeItem.CELL_MODE_CHECK)
+				leaf.set_checked(0, roadmap_dic[key][2][i])
 
 
 func show_slide(slide : int):
@@ -54,6 +107,10 @@ func _input(event):
 		if event.scancode == KEY_F:
 			OS.window_fullscreen = not OS.window_fullscreen
 			
+
+
+func set_roadmap_visible(val):
+	$layout/middle/left.visible = val
 "
 
 [sub_resource type="DynamicFont" id=2]
@@ -62,13 +119,7 @@ use_mipmaps = true
 use_filter = true
 font_data = ExtResource( 3 )
 
-[sub_resource type="StyleBoxEmpty" id=3]
-content_margin_left = 16.0
-content_margin_right = 16.0
-content_margin_top = 16.0
-content_margin_bottom = 16.0
-
-[sub_resource type="GDScript" id=4]
+[sub_resource type="GDScript" id=3]
 script/source = "extends Position2D
 
 
@@ -124,42 +175,86 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="middle" type="Panel" parent="layout"]
+[node name="btn_road" type="Button" parent="layout/title"]
+anchor_bottom = 1.0
+margin_left = 22.0
+margin_top = 16.0
+margin_right = 235.0
+margin_bottom = -17.0
+focus_mode = 0
+toggle_mode = true
+enabled_focus_mode = 0
+text = "Roadmap"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="middle" type="HSplitContainer" parent="layout"]
 margin_top = 107.0
 margin_right = 1680.0
 margin_bottom = 944.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
-custom_styles/panel = SubResource( 3 )
+split_offset = 406
 
-[node name="scenes" type="Control" parent="layout/middle"]
+[node name="left" type="Control" parent="layout/middle"]
+margin_right = 406.0
+margin_bottom = 837.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="lb" type="Label" parent="layout/middle/left"]
+anchor_right = 1.0
+margin_bottom = 36.0
+text = "Roadmap"
+align = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="roadmap" type="Tree" parent="layout/middle/left"]
 anchor_right = 1.0
 anchor_bottom = 1.0
-margin_left = 14.0
-margin_top = 13.0
-margin_right = -13.0
-margin_bottom = -12.0
+margin_top = 44.0
+columns = 2
+hide_root = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="right" type="Control" parent="layout/middle"]
+margin_left = 418.0
+margin_right = 1680.0
+margin_bottom = 837.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="scenes" type="Control" parent="layout/middle/right"]
+anchor_right = 1.0
+anchor_bottom = 1.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Free Operator" parent="layout/middle/scenes" instance=ExtResource( 1 )]
+[node name="Free Operator" parent="layout/middle/right/scenes" instance=ExtResource( 1 )]
 visible = false
-target = NodePath("../../../../target")
+target = NodePath("../../../../../target")
 
-[node name="Constrained Operator" parent="layout/middle/scenes" instance=ExtResource( 2 )]
+[node name="Constrained Operator" parent="layout/middle/right/scenes" instance=ExtResource( 2 )]
 visible = false
-target = NodePath("../../../../target")
+target = NodePath("../../../../../target")
 
-[node name="FABRIK explanation" parent="layout/middle/scenes" instance=ExtResource( 4 )]
-visible = false
-
-[node name="Angles calculation" parent="layout/middle/scenes" instance=ExtResource( 5 )]
+[node name="FABRIK explanation" parent="layout/middle/right/scenes" instance=ExtResource( 4 )]
 visible = false
 
-[node name="Example Scene" type="ViewportContainer" parent="layout/middle/scenes"]
+[node name="Angles calculation" parent="layout/middle/right/scenes" instance=ExtResource( 5 )]
+visible = false
+
+[node name="Example Scene" type="ViewportContainer" parent="layout/middle/right/scenes"]
 visible = false
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -168,28 +263,23 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Viewport" type="Viewport" parent="layout/middle/scenes/Example Scene"]
-size = Vector2( 1653, 812 )
-handle_input_locally = false
-render_target_update_mode = 0
+[node name="example" parent="layout/middle/right/scenes/Example Scene" instance=ExtResource( 8 )]
+margin_left = -404.0
+margin_top = 13.0
+margin_right = -404.0
+margin_bottom = 13.0
 
-[node name="example" parent="layout/middle/scenes/Example Scene/Viewport" instance=ExtResource( 8 )]
-margin_left = 14.0
-margin_top = 120.0
-margin_right = 14.0
-margin_bottom = 120.0
-
-[node name="Pause Stream" parent="layout/middle/scenes" instance=ExtResource( 9 )]
+[node name="Pause Stream" parent="layout/middle/right/scenes" instance=ExtResource( 9 )]
 visible = false
-brb_time = 480
+brb_time = 300
 
-[node name="key_snip" parent="layout/middle" instance=ExtResource( 7 )]
+[node name="key_snip" parent="layout/middle/right" instance=ExtResource( 7 )]
 anchor_left = 1.0
 anchor_right = 1.0
-margin_left = -169.379
-margin_top = 17.6389
-margin_right = -16.3789
-margin_bottom = 147.639
+margin_left = -153.0
+margin_top = 0.0
+margin_right = 0.0
+margin_bottom = 837.0
 
 [node name="bottom" type="ColorRect" parent="layout"]
 margin_top = 944.0
@@ -247,4 +337,4 @@ text = "Angles definition"
 
 [node name="target" type="Position2D" parent="."]
 position = Vector2( 854.144, 813.377 )
-script = SubResource( 4 )
+script = SubResource( 3 )
