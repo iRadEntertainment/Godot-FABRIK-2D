@@ -1,7 +1,7 @@
 # targeting_system.gd
 extends Node2D
 
-
+export var active : bool = true
 export var show_debug := true
 export (NodePath) var attach_to_node
 export (float, 0.5, 5.0) var gallop_speed = 1.5
@@ -26,6 +26,21 @@ func _ready():
 	
 	for ray in $rays.get_children():
 		rays_init_pos.append(ray.position)
+	
+	var legs = [$"../horse/front_l", $"../horse/front_r",\
+			$"../horse/rear_l", $"../horse/rear_r"]
+	var targets = []
+	var rays = []
+	for child in $targets.get_children():
+		targets.append(child)
+	for child in $rays.get_children():
+		rays.append(child)
+	
+	# assign all legs this node targets
+	if active:
+		for i in range(4):
+			legs[i].target = legs[i].get_path_to(targets[i])
+			rays[i].global_position = legs[i].global_position + Vector2.DOWN * 160
 
 
 

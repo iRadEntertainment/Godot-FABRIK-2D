@@ -20,8 +20,8 @@ func _ready():
 
 func generate_polygon(iteration):
 	var points : PoolVector2Array = []
-	var p0 = Vector2(-get_viewport_rect().size.x * 2, get_viewport_rect().size.y)
-	var p1 = Vector2( get_viewport_rect().size.x * 3, get_viewport_rect().size.y)
+	var p0 = Vector2(-get_viewport_rect().size.x * 2, get_viewport_rect().size.y*2)
+	var p1 = Vector2( get_viewport_rect().size.x * 3, get_viewport_rect().size.y*2)
 	points.append(p0)
 	points.append(p1)
 	

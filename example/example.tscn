@@ -68,10 +68,9 @@ __meta__ = {
 layer = -1
 
 [node name="bg_color" type="ColorRect" parent="CanvasLayer"]
-visible = false
 anchor_right = 1.0
 anchor_bottom = 1.0
-color = Color( 0.12549, 0.388235, 0.607843, 1 )
+color = Color( 0.164706, 0.219608, 0.231373, 1 )
 __meta__ = {
 "_edit_lock_": true,
 "_edit_use_anchors_": false
@@ -92,7 +91,7 @@ texture = ExtResource( 9 )
 script = ExtResource( 10 )
 
 [node name="poly" type="Polygon2D" parent="terrain_generator"]
-color = Color( 0.235294, 0.682353, 0.639216, 1 )
+color = Color( 0.745098, 0.211765, 0.156863, 1 )
 polygon = PoolVector2Array( -68.6539, 912.083, 57.8537, 623.432, 383.923, 612.742, 750.973, 684.013, 980.825, 664.414, 1276.6, 605.614, 1622.27, 676.886, 1787.98, 853.284, 1627.62, 1175.79, 193.27, 1074.23 )
 
 [node name="static_collision" type="StaticBody2D" parent="terrain_generator"]
@@ -102,6 +101,7 @@ polygon = PoolVector2Array( -68.6539, 912.083, 57.8537, 623.432, 383.923, 612.74
 [node name="horse" type="KinematicBody2D" parent="." groups=[
 "horse",
 ]]
+modulate = Color( 0.705882, 0.729412, 0.627451, 1 )
 position = Vector2( 1568.09, 441.984 )
 scale = Vector2( 0.5, 0.5 )
 collision_layer = 2
@@ -144,7 +144,7 @@ show_behind_parent = true
 position = Vector2( 244.639, 89.9283 )
 script = ExtResource( 2 )
 use_constraints = true
-target = NodePath("../../targeting_system_loop/targets/t04")
+target = NodePath("../../target")
 
 [node name="arm" type="Node2D" parent="horse/rear_r"]
 show_behind_parent = true
@@ -153,7 +153,6 @@ angle_start = 28.973
 angle_width = 163.973
 
 [node name="arm" type="Sprite" parent="horse/rear_r/arm"]
-visible = false
 show_behind_parent = true
 position = Vector2( -0.272461, -0.0234985 )
 texture = ExtResource( 5 )
@@ -167,7 +166,6 @@ angle_start = -128.836
 angle_width = 131.918
 
 [node name="forearm" type="Sprite" parent="horse/rear_r/forearm"]
-visible = false
 show_behind_parent = true
 position = Vector2( 0.355286, 48.1064 )
 texture = ExtResource( 4 )
@@ -179,7 +177,6 @@ script = ExtResource( 1 )
 angle_start = -40.069
 
 [node name="foot" type="Sprite" parent="horse/rear_r/foot"]
-visible = false
 show_behind_parent = true
 position = Vector2( -1.93286, 6.53381 )
 texture = ExtResource( 7 )
@@ -192,7 +189,7 @@ position = Vector2( 0, 332.995 )
 position = Vector2( 137.045, 89.9283 )
 script = ExtResource( 2 )
 use_constraints = true
-target = NodePath("../../targeting_system_loop/targets/t03")
+target = NodePath("../../target")
 
 [node name="arm" type="Node2D" parent="horse/rear_l"]
 show_behind_parent = true
@@ -238,7 +235,7 @@ show_behind_parent = true
 position = Vector2( -126.638, 89.9283 )
 script = ExtResource( 2 )
 use_constraints = true
-target = NodePath("../../targeting_system_loop/targets/t02")
+target = NodePath("../../target")
 
 [node name="arm" type="Node2D" parent="horse/front_r"]
 show_behind_parent = true
@@ -283,7 +280,7 @@ position = Vector2( 0, 332.995 )
 position = Vector2( -236.169, 89.9283 )
 script = ExtResource( 2 )
 use_constraints = true
-target = NodePath("../../targeting_system_loop/targets/t01")
+target = NodePath("../../target")
 
 [node name="arm" type="Node2D" parent="horse/front_l"]
 show_behind_parent = true
@@ -348,6 +345,7 @@ script = SubResource( 5 )
 [node name="targeting_snap_to_ground" type="Node2D" parent="."]
 visible = false
 script = ExtResource( 12 )
+debug = false
 active = false
 
 [node name="rays" type="Node2D" parent="targeting_snap_to_ground"]
@@ -388,8 +386,9 @@ position = Vector2( 1014.73, 743.01 )
 
 [node name="targeting_system_loop" type="Node2D" parent="."]
 script = ExtResource( 11 )
+show_debug = false
 attach_to_node = NodePath("../horse")
-gallop_speed = 1.2
+gallop_speed = 1.783
 horse_controller_path = NodePath("../horse/kinematic_controller")
 
 [node name="rays" type="Node2D" parent="targeting_system_loop"]

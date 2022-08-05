@@ -274,7 +274,7 @@ func create_point(pos):
 
 
 func delete_point(pos):
-	if p_nodes.size() < 1:
+	if p_nodes.size() <= 1:
 		return
 	
 	var closer_point = 0

@@ -276,9 +276,9 @@ brb_time = 300
 [node name="key_snip" parent="layout/middle/right" instance=ExtResource( 7 )]
 anchor_left = 1.0
 anchor_right = 1.0
-margin_left = -153.0
+margin_left = -244.0
 margin_top = 0.0
-margin_right = 0.0
+margin_right = -24.0
 margin_bottom = 837.0
 
 [node name="bottom" type="ColorRect" parent="layout"]

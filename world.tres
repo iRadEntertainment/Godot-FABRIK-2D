@@ -1,6 +1,6 @@
 [gd_resource type="Theme" load_steps=6 format=2]
 
-[ext_resource path="res://Alatsi-Regular.ttf" type="DynamicFontData" id=1]
+[ext_resource path="res://Hack-Bold.ttf" type="DynamicFontData" id=1]
 
 [sub_resource type="StyleBoxFlat" id=1]
 content_margin_left = 16.0
@@ -45,7 +45,7 @@ corner_radius_bottom_right = 2
 corner_radius_bottom_left = 2
 
 [sub_resource type="DynamicFont" id=4]
-size = 28
+use_filter = true
 font_data = ExtResource( 1 )
 
 [resource]

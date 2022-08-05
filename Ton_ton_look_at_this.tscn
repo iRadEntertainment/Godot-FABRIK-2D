@@ -1,0 +1,66 @@
+[gd_scene load_steps=7 format=2]
+
+[ext_resource path="res://addons/IKFabrikGodot2D/IKBoneConstraint2D.gd" type="Script" id=1]
+[ext_resource path="res://addons/IKFabrikGodot2D/IKLimb2D.gd" type="Script" id=2]
+[ext_resource path="res://example/textures/forearm.png" type="Texture" id=3]
+[ext_resource path="res://example/textures/arm.png" type="Texture" id=4]
+[ext_resource path="res://example/textures/foot.png" type="Texture" id=5]
+
+[sub_resource type="GDScript" id=5]
+script/source = "extends Position2D
+
+
+func _input(_event):
+	global_position = get_global_mouse_position()
+"
+
+[node name="Ton_ton_look_at_this" type="Node2D"]
+
+[node name="rear_r" type="Node2D" parent="."]
+show_behind_parent = true
+position = Vector2( 811.251, 362.543 )
+script = ExtResource( 2 )
+use_constraints = true
+target = NodePath("../target")
+
+[node name="arm" type="Node2D" parent="rear_r"]
+show_behind_parent = true
+script = ExtResource( 1 )
+angle_start = 28.973
+angle_width = 163.973
+
+[node name="arm" type="Sprite" parent="rear_r/arm"]
+show_behind_parent = true
+position = Vector2( -0.272461, -0.0234985 )
+texture = ExtResource( 4 )
+offset = Vector2( 0.841858, 57.2455 )
+
+[node name="forearm" type="Node2D" parent="rear_r"]
+show_behind_parent = true
+position = Vector2( -0.125, 155.934 )
+script = ExtResource( 1 )
+angle_start = -128.836
+angle_width = 131.918
+
+[node name="forearm" type="Sprite" parent="rear_r/forearm"]
+show_behind_parent = true
+position = Vector2( 0.355286, 48.1064 )
+texture = ExtResource( 3 )
+
+[node name="foot" type="Node2D" parent="rear_r"]
+show_behind_parent = true
+position = Vector2( -0.268677, 296.896 )
+script = ExtResource( 1 )
+angle_start = -40.069
+
+[node name="foot" type="Sprite" parent="rear_r/foot"]
+show_behind_parent = true
+position = Vector2( -1.93286, 6.53381 )
+texture = ExtResource( 5 )
+
+[node name="end" type="Position2D" parent="rear_r"]
+show_behind_parent = true
+position = Vector2( 0, 332.995 )
+
+[node name="target" type="Position2D" parent="."]
+script = SubResource( 5 )

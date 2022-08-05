@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=2]
+[gd_scene load_steps=13 format=2]
 
 [ext_resource path="res://addons/textures/line_dotted.png" type="Texture" id=1]
 [ext_resource path="res://addons/textures/line_dashed.png" type="Texture" id=2]
@@ -7,16 +7,18 @@
 [ext_resource path="res://fabrik.gd" type="Script" id=5]
 [ext_resource path="res://addons/textures/line.png" type="Texture" id=6]
 [ext_resource path="res://world.tres" type="Theme" id=7]
+[ext_resource path="res://Hack-Bold.ttf" type="DynamicFontData" id=8]
 
 [sub_resource type="DynamicFont" id=1]
 size = 48
-font_data = ExtResource( 4 )
+use_filter = true
+font_data = ExtResource( 8 )
 
-[sub_resource type="DynamicFont" id=4]
+[sub_resource type="DynamicFont" id=2]
 size = 24
 font_data = ExtResource( 4 )
 
-[sub_resource type="GDScript" id=2]
+[sub_resource type="GDScript" id=3]
 script/source = "extends Sprite
 
 
@@ -32,7 +34,7 @@ func _draw():
 	pass
 "
 
-[sub_resource type="DynamicFont" id=3]
+[sub_resource type="DynamicFont" id=4]
 size = 20
 font_data = ExtResource( 4 )
 
@@ -78,16 +80,16 @@ __meta__ = {
 }
 
 [node name="delete_points" type="Button" parent="buttons"]
-margin_right = 328.0
-margin_bottom = 42.0
+margin_right = 294.0
+margin_bottom = 25.0
 focus_mode = 0
 enabled_focus_mode = 0
 text = "Delete all points"
 
 [node name="add_points" type="Button" parent="buttons"]
-margin_top = 46.0
-margin_right = 328.0
-margin_bottom = 88.0
+margin_top = 29.0
+margin_right = 294.0
+margin_bottom = 54.0
 focus_mode = 0
 toggle_mode = true
 enabled_focus_mode = 0
@@ -103,26 +105,26 @@ __meta__ = {
 }
 
 [node name="per_click" type="HBoxContainer" parent="iterations"]
-margin_right = 261.0
+margin_right = 272.0
 margin_bottom = 31.0
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="lb" type="Label" parent="iterations/per_click"]
-margin_right = 198.0
-margin_bottom = 31.0
-custom_fonts/font = SubResource( 4 )
+margin_top = 6.0
+margin_right = 210.0
+margin_bottom = 25.0
 text = "Iterations per click:"
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="value" type="Label" parent="iterations/per_click"]
-margin_left = 202.0
-margin_right = 210.0
+margin_left = 214.0
+margin_right = 222.0
 margin_bottom = 31.0
-custom_fonts/font = SubResource( 4 )
+custom_fonts/font = SubResource( 2 )
 text = "1"
 __meta__ = {
 "_edit_use_anchors_": false
@@ -130,26 +132,26 @@ __meta__ = {
 
 [node name="tot" type="HBoxContainer" parent="iterations"]
 margin_top = 35.0
-margin_right = 261.0
+margin_right = 272.0
 margin_bottom = 66.0
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="lb" type="Label" parent="iterations/tot"]
-margin_right = 249.0
-margin_bottom = 31.0
-custom_fonts/font = SubResource( 4 )
+margin_top = 6.0
+margin_right = 260.0
+margin_bottom = 25.0
 text = "Iterations (points) total:"
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="value" type="Label" parent="iterations/tot"]
-margin_left = 253.0
-margin_right = 261.0
+margin_left = 264.0
+margin_right = 272.0
 margin_bottom = 31.0
-custom_fonts/font = SubResource( 4 )
+custom_fonts/font = SubResource( 2 )
 text = "1"
 __meta__ = {
 "_edit_use_anchors_": false
@@ -157,26 +159,26 @@ __meta__ = {
 
 [node name="chain" type="HBoxContainer" parent="iterations"]
 margin_top = 70.0
-margin_right = 261.0
+margin_right = 272.0
 margin_bottom = 101.0
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="lb" type="Label" parent="iterations/chain"]
-margin_right = 241.0
-margin_bottom = 31.0
-custom_fonts/font = SubResource( 4 )
+margin_top = 6.0
+margin_right = 250.0
+margin_bottom = 25.0
 text = "Iterations (chain) total:"
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="value" type="Label" parent="iterations/chain"]
-margin_left = 245.0
-margin_right = 259.0
+margin_left = 254.0
+margin_right = 268.0
 margin_bottom = 31.0
-custom_fonts/font = SubResource( 4 )
+custom_fonts/font = SubResource( 2 )
 text = "0"
 __meta__ = {
 "_edit_use_anchors_": false
@@ -217,7 +219,7 @@ visible = false
 [node name="00" type="Sprite" parent="points_little"]
 position = Vector2( 728.378, 677.551 )
 texture = ExtResource( 3 )
-script = SubResource( 2 )
+script = SubResource( 3 )
 __meta__ = {
 "_edit_group_": true
 }
@@ -227,7 +229,7 @@ margin_left = -20.9763
 margin_top = 7.49152
 margin_right = 19.0237
 margin_bottom = 21.4915
-custom_fonts/font = SubResource( 3 )
+custom_fonts/font = SubResource( 4 )
 text = "p0"
 align = 1
 valign = 1
@@ -238,7 +240,7 @@ __meta__ = {
 [node name="01" type="Sprite" parent="points_little"]
 position = Vector2( 837.267, 692.082 )
 texture = ExtResource( 3 )
-script = SubResource( 2 )
+script = SubResource( 3 )
 __meta__ = {
 "_edit_group_": true
 }
@@ -248,7 +250,7 @@ margin_left = -20.9763
 margin_top = 7.49152
 margin_right = 19.0237
 margin_bottom = 21.4915
-custom_fonts/font = SubResource( 3 )
+custom_fonts/font = SubResource( 4 )
 text = "p1"
 align = 1
 valign = 1
@@ -259,7 +261,7 @@ __meta__ = {
 [node name="02" type="Sprite" parent="points_little"]
 position = Vector2( 918.193, 663.702 )
 texture = ExtResource( 3 )
-script = SubResource( 2 )
+script = SubResource( 3 )
 __meta__ = {
 "_edit_group_": true
 }
@@ -269,7 +271,7 @@ margin_left = -20.9763
 margin_top = 7.49152
 margin_right = 19.0237
 margin_bottom = 21.4915
-custom_fonts/font = SubResource( 3 )
+custom_fonts/font = SubResource( 4 )
 text = "p2"
 align = 1
 valign = 1
@@ -280,7 +282,7 @@ __meta__ = {
 [node name="end" type="Sprite" parent="points_little"]
 position = Vector2( 939.479, 486.346 )
 texture = ExtResource( 3 )
-script = SubResource( 2 )
+script = SubResource( 3 )
 __meta__ = {
 "_edit_group_": true
 }
@@ -290,7 +292,7 @@ margin_left = -20.9763
 margin_top = 7.49152
 margin_right = 19.0237
 margin_bottom = 21.4915
-custom_fonts/font = SubResource( 3 )
+custom_fonts/font = SubResource( 4 )
 text = "end"
 align = 1
 valign = 1
@@ -303,7 +305,7 @@ __meta__ = {
 [node name="00" type="Sprite" parent="points"]
 position = Vector2( 808.073, 774.083 )
 texture = ExtResource( 3 )
-script = SubResource( 2 )
+script = SubResource( 3 )
 __meta__ = {
 "_edit_group_": true
 }
@@ -313,7 +315,7 @@ margin_left = -20.9763
 margin_top = 7.49152
 margin_right = 19.0237
 margin_bottom = 21.4915
-custom_fonts/font = SubResource( 3 )
+theme = ExtResource( 7 )
 text = "p0"
 align = 1
 valign = 1
@@ -324,7 +326,7 @@ __meta__ = {
 [node name="01" type="Sprite" parent="points"]
 position = Vector2( 837.267, 692.082 )
 texture = ExtResource( 3 )
-script = SubResource( 2 )
+script = SubResource( 3 )
 __meta__ = {
 "_edit_group_": true
 }
@@ -334,7 +336,7 @@ margin_left = -20.9763
 margin_top = 7.49152
 margin_right = 19.0237
 margin_bottom = 21.4915
-custom_fonts/font = SubResource( 3 )
+theme = ExtResource( 7 )
 text = "p1"
 align = 1
 valign = 1
@@ -345,7 +347,7 @@ __meta__ = {
 [node name="02" type="Sprite" parent="points"]
 position = Vector2( 918.193, 663.702 )
 texture = ExtResource( 3 )
-script = SubResource( 2 )
+script = SubResource( 3 )
 __meta__ = {
 "_edit_group_": true
 }
@@ -355,7 +357,7 @@ margin_left = -20.9763
 margin_top = 7.49152
 margin_right = 19.0237
 margin_bottom = 21.4915
-custom_fonts/font = SubResource( 3 )
+theme = ExtResource( 7 )
 text = "p2"
 align = 1
 valign = 1
@@ -363,94 +365,10 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="03" type="Sprite" parent="points"]
-position = Vector2( 1020.27, 594.387 )
-texture = ExtResource( 3 )
-script = SubResource( 2 )
-__meta__ = {
-"_edit_group_": true
-}
-
-[node name="lb" type="Label" parent="points/03"]
-margin_left = -20.9763
-margin_top = 7.49152
-margin_right = 19.0237
-margin_bottom = 21.4915
-custom_fonts/font = SubResource( 3 )
-text = "p3"
-align = 1
-valign = 1
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="04" type="Sprite" parent="points"]
-position = Vector2( 1099.56, 563.206 )
-texture = ExtResource( 3 )
-script = SubResource( 2 )
-__meta__ = {
-"_edit_group_": true
-}
-
-[node name="lb" type="Label" parent="points/04"]
-margin_left = -20.9763
-margin_top = 7.49152
-margin_right = 19.0237
-margin_bottom = 21.4915
-custom_fonts/font = SubResource( 3 )
-text = "p4"
-align = 1
-valign = 1
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="05" type="Sprite" parent="points"]
-position = Vector2( 1103.12, 504.407 )
-texture = ExtResource( 3 )
-script = SubResource( 2 )
-__meta__ = {
-"_edit_group_": true
-}
-
-[node name="lb" type="Label" parent="points/05"]
-margin_left = -20.9763
-margin_top = 7.49152
-margin_right = 19.0237
-margin_bottom = 21.4915
-custom_fonts/font = SubResource( 3 )
-text = "p5"
-align = 1
-valign = 1
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="06" type="Sprite" parent="points"]
-position = Vector2( 1016.7, 419.771 )
-texture = ExtResource( 3 )
-script = SubResource( 2 )
-__meta__ = {
-"_edit_group_": true
-}
-
-[node name="lb" type="Label" parent="points/06"]
-margin_left = -21.0
-margin_top = 7.0
-margin_right = 19.0
-margin_bottom = 33.0
-custom_fonts/font = SubResource( 3 )
-text = "p6"
-align = 1
-valign = 1
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
 [node name="end" type="Sprite" parent="points"]
-position = Vector2( 960.806, 376.345 )
+position = Vector2( 986.168, 565.892 )
 texture = ExtResource( 3 )
-script = SubResource( 2 )
+script = SubResource( 3 )
 __meta__ = {
 "_edit_group_": true
 }
@@ -460,7 +378,7 @@ margin_left = -20.9763
 margin_top = 7.49152
 margin_right = 19.0237
 margin_bottom = 21.4915
-custom_fonts/font = SubResource( 3 )
+theme = ExtResource( 7 )
 text = "end"
 align = 1
 valign = 1
@@ -472,14 +390,14 @@ __meta__ = {
 modulate = Color( 0.898039, 0.266667, 0.25098, 1 )
 position = Vector2( 711.929, 750.307 )
 texture = ExtResource( 3 )
-script = SubResource( 2 )
+script = SubResource( 3 )
 
 [node name="lb" type="Label" parent="root"]
 margin_left = -20.9763
 margin_top = 27.4915
 margin_right = 19.0237
 margin_bottom = 48.4915
-custom_fonts/font = SubResource( 3 )
+theme = ExtResource( 7 )
 text = "root"
 align = 1
 valign = 1
@@ -491,14 +409,14 @@ __meta__ = {
 modulate = Color( 0.0352941, 0.819608, 0.321569, 1 )
 position = Vector2( 830.819, 377.367 )
 texture = ExtResource( 3 )
-script = SubResource( 2 )
+script = SubResource( 3 )
 
 [node name="lb" type="Label" parent="goal"]
 margin_left = -20.9763
 margin_top = 21.2645
 margin_right = 19.0237
 margin_bottom = 47.2645
-custom_fonts/font = SubResource( 3 )
+theme = ExtResource( 7 )
 text = "goal"
 align = 1
 valign = 1

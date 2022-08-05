@@ -1,15 +1,43 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://icon_orig.png" type="Texture" id=1]
 [ext_resource path="res://addons/IKFabrikGodot2D/IKLimb2D.gd" type="Script" id=2]
 [ext_resource path="res://example_scene.gd" type="Script" id=3]
 [ext_resource path="res://controller.tscn" type="PackedScene" id=4]
 
+[sub_resource type="Gradient" id=1]
+offsets = PoolRealArray( 0, 0.477012, 1 )
+colors = PoolColorArray( 0.745098, 0.211765, 0.156863, 1, 0, 0, 0, 1, 0.164706, 0.219608, 0.231373, 1 )
+
+[sub_resource type="GradientTexture" id=2]
+gradient = SubResource( 1 )
+
 [node name="no_constr" type="Control"]
 anchor_right = 1.0
 anchor_bottom = 1.0
 script = ExtResource( 3 )
 __meta__ = {
+"_edit_use_anchors_": false
+}
+active = true
+
+[node name="bgt" type="TextureRect" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+texture = SubResource( 2 )
+expand = true
+stretch_mode = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="bg" type="ColorRect" parent="."]
+visible = false
+anchor_right = 1.0
+anchor_bottom = 1.0
+color = Color( 0.164706, 0.219608, 0.231373, 1 )
+__meta__ = {
+"_edit_lock_": true,
 "_edit_use_anchors_": false
 }
 
@@ -175,3 +203,5 @@ offset = Vector2( 29.8332, 2.97565 )
 [node name="end" type="Position2D" parent="operator/arm4"]
 show_behind_parent = true
 position = Vector2( 319.973, 0 )
+
+[node name="target_default" type="Position2D" parent="."]

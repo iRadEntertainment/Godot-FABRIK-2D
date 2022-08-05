@@ -45,57 +45,63 @@ __meta__ = {
 }
 
 [node name="q" type="Button" parent="inputs"]
-margin_right = 40.0
+margin_right = 51.0
 margin_bottom = 40.0
 rect_min_size = Vector2( 40, 40 )
 mouse_filter = 2
+size_flags_horizontal = 3
 toggle_mode = true
 text = "Q"
 
 [node name="w" type="Button" parent="inputs"]
-margin_left = 40.0
-margin_right = 80.0
+margin_left = 51.0
+margin_right = 102.0
 margin_bottom = 40.0
 rect_min_size = Vector2( 40, 40 )
 mouse_filter = 2
+size_flags_horizontal = 3
 toggle_mode = true
 text = "W"
 
 [node name="e" type="Button" parent="inputs"]
-margin_left = 80.0
-margin_right = 120.0
+margin_left = 102.0
+margin_right = 153.0
 margin_bottom = 40.0
 rect_min_size = Vector2( 40, 40 )
 mouse_filter = 2
+size_flags_horizontal = 3
 toggle_mode = true
 text = "E"
 
 [node name="a" type="Button" parent="inputs"]
 margin_top = 40.0
-margin_right = 40.0
+margin_right = 51.0
 margin_bottom = 80.0
 rect_min_size = Vector2( 40, 40 )
 mouse_filter = 2
+size_flags_horizontal = 3
 toggle_mode = true
 text = "A"
 
 [node name="s" type="Button" parent="inputs"]
-margin_left = 40.0
+margin_left = 51.0
 margin_top = 40.0
-margin_right = 80.0
+margin_right = 102.0
 margin_bottom = 80.0
 rect_min_size = Vector2( 40, 40 )
 mouse_filter = 2
+size_flags_horizontal = 3
 toggle_mode = true
 text = "S"
 
 [node name="d" type="Button" parent="inputs"]
-margin_left = 80.0
+margin_left = 102.0
 margin_top = 40.0
-margin_right = 120.0
+margin_right = 153.0
 margin_bottom = 80.0
 rect_min_size = Vector2( 40, 40 )
 mouse_filter = 2
+size_flags_horizontal = 3
 toggle_mode = true
 text = "D"
 

@@ -7,7 +7,7 @@ onready var kine : KinematicBody2D = get_parent()
 var jump_force = -1500
 
 var gravity : int = 3000
-var move_speed : int = 300
+var move_speed : int = 250
 var dir : int
 var vel : Vector2
 
